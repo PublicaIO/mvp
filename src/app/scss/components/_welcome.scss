@@ -1,0 +1,24 @@
+#app {
+    display: flex;
+    flex-direction: column;
+
+    .wrap {
+        width: 1024px;
+        margin: 0 auto;
+
+        .logotype {
+            display: block;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .welcome {
+            text-align: center;
+        }
+    }
+}
