@@ -1,3 +1,5 @@
 node_modules
-public/js
+public/
+!public/images
 npm-debug.log
+.env

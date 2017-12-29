@@ -1,14 +1,17 @@
-const pageA = { template: '<div>Page A</div>' }
-const pageB = { template: '<div>Page B</div>' }
+import Login from 'components/pages/login';
+import Dashboard from 'components/pages/dashboard';
 
 export default [
     {
-        path: '/page-a',
-        component: pageA,
-        alias: '/'
+        path: '/dashboard',
+        component: Dashboard,
+        alias: '/',
+        meta: {
+            requiresAuth: true
+        }
     },
     {
-        path: '/page-b',
-        component: pageB
+        path: '/login',
+        component: Login,
     }
-]
+];

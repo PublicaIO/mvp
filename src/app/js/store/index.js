@@ -1,5 +1,11 @@
 export default {
     state: {
-        title: 'Publica MVP'
+        isLoggedIn: false
+    },
+
+    mutations: {
+        changeState(state, isLoggedIn) {
+            state.isLoggedIn = isLoggedIn;
+        }
     }
-}
+};
