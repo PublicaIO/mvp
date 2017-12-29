@@ -1,0 +1,36 @@
+a.button,
+.button {
+    color: $main-simple-color;
+    padding: 12px 20px;
+    border-radius: 3px;
+    border: 0;
+    text-decoration: none;
+    transition: all .3s;
+
+    &:hover {
+        opacity: .8;
+    }
+
+    &.button-large {
+        min-width: 265px;
+        border-radius: 5px;
+        font-size: $button-large-font-size;
+        font-weight: 400;
+    }
+
+    &:hover {
+        color: $main-simple-color;
+    }
+
+    &.button-active-action {
+        background: $active-color;
+    }
+
+    &.button-passive-action {
+        background: $passive-color;
+    }
+
+    &.button-success {
+        background: $success-color;
+    }
+}
