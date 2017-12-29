@@ -1,5 +1,7 @@
-@import "utils/globals";
 @import "utils/variables";
+@import "utils/globals";
 
 @import "components/buttons";
-@import "components/welcome";
+
+@import "pages/layout";
+@import "pages/login";

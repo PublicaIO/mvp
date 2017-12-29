@@ -8,13 +8,14 @@
   "scripts": {
     "build": "webpack --config config/webpack.config.js",
     "watch": "webpack --config config/webpack.config.js --watch",
-    "dev": "nodemon src/server"
+    "dev": "node src/server"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.7",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "eslint": "^4.14.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -31,9 +32,11 @@
     "webpack": "^3.10.0"
   },
   "dependencies": {
-    "dotenv": "^4.0.0",
+    "bn.js": "^4.11.8",
     "firebase": "^4.8.1",
     "loadash": "^1.0.0",
+    "moment": "^2.20.1",
+    "numeral": "^2.0.6",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

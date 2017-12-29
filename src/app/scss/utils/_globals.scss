@@ -9,3 +9,46 @@ html body {
     padding: 0;
     font-family: 'Lato', sans-serif;
 }
+
+.page-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 40px 0;
+ 
+    &.border {
+        border-bottom: 2px solid $border-color;
+    }
+
+    .page-title {
+        flex: 1 1 auto;
+        font-size: $heading-font-size;
+        text-transform: uppercase;
+        font-weight: 300;
+        margin: 22px 0 11px 0;
+
+        p {
+            font-size: $label-font-size;
+            margin: 10px 0 0 0;
+
+            span {
+                color: $primary-color;
+            }
+        }
+    }
+
+    .page-actions {
+        flex: 1 1 auto;
+        text-align: right;
+
+        button {
+            text-transform: uppercase;
+            margin: 0 5px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

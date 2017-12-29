@@ -6,6 +6,7 @@ import Store from 'store';
 import App from 'components/App';
 import { requireAuth } from 'helpers/auth';
 import firebase from 'firebase';
+import filters from 'filters';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyDMVH7YklsngH7XcIuJK7Ssw1t8-2_zcUU',
@@ -26,6 +27,10 @@ Vue.use(Vuex);
 const router = new VueRouter({ routes });
 const store = new Vuex.Store(Store);
 
+filters.forEach((filter) => {
+    Vue.filter(filter.title, filter.filter);
+});
+
 router.beforeEach(requireAuth);
 
 new Vue({
@@ -37,12 +42,16 @@ new Vue({
 
     methods: {
         changeAuthState(user) {
-            this.$store.commit('changeState', !!user);
-        },
+            this.$store.commit('changeState', Boolean(user));
 
-        // createUser() {
-        //     firebase.auth().createUserWithEmailAndPassword('example-user@example.com', 'example-password').catch(console.log);
-        // }
+            if (user) {
+                this.$store.commit('setUser', user);
+                this.$router.push('/');
+            } else {
+                this.$store.commit('setUser', null);
+                this.$router.push('/login');
+            }
+        }
     },
 
     mounted() {
