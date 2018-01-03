@@ -6,15 +6,18 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import axios from 'axios';
 
 export default {
     methods: {
         logout() {
-            firebase.auth().signOut().then(() => {
-                console.log('logout?');
-                this.$router.push('/');
-            });
+            axios.get('/logout')
+                .then((resp) => {
+                    window.location.href = '/';
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
     }
 }

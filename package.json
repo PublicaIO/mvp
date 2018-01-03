@@ -32,7 +32,9 @@
     "webpack": "^3.10.0"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "bn.js": "^4.11.8",
+    "body-parser": "^1.18.2",
     "firebase": "^4.8.1",
     "loadash": "^1.0.0",
     "moment": "^2.20.1",

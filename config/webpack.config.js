@@ -6,10 +6,13 @@ const rootPath = path.join(__dirname, '..', 'src');
 module.exports = {
     devtool: 'eval',
     context: path.join(rootPath, 'app'),
-    entry: path.join(rootPath, 'app', 'js', 'index.js'),
+    entry: {
+        app: path.join(rootPath, 'app', 'js', 'index.js'),
+        login: path.join(rootPath, 'app', 'js', 'login.js')
+    },
 
     output: {
-        filename: './public/js/app.js'
+        filename: './public/js/[name].js'
     },
 
     resolve: {

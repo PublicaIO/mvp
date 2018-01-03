@@ -1,7 +1,7 @@
 <template>
     <div id="page-login">
         <p>
-            <input type="text" v-model="username" placeholder="Username">
+            <input type="text" v-model="email" placeholder="Email">
         </p>
 
         <p>
@@ -10,26 +10,43 @@
 
         <p>
             <button @click="login">Login</button>
+            <button @click="register">Register</button>
         </p>
     </div>
 </template>
 
 <script>
-import firebase from 'firebase';
+import axios from 'axios';
 
 export default {
     data() {
         return {
-            username: 'yolo@xmpl.com',
-            password: 'option123'
+            email: 'thisis@example.com',
+            password: 'example'
         }
     },
 
     methods: {
         login() {
-            firebase.auth().signInWithEmailAndPassword('yolo@xmpl.com', 'option123').then(() => {
-                this.$router.push('/');
-            }).catch(console.log);
+            axios.post('/login', {
+                email: this.email,
+                password: this.password
+            }).then((resp) => {
+                window.location.href = '/';
+            }).catch((error) => {
+                console.log(error);
+            });
+        },
+
+        register() {
+            axios.post('/register', {
+                email: this.email,
+                password: this.password
+            }).then((resp) => {
+                this.login();
+            }).catch((error) => {
+                console.log(error);
+            });
         }
     }
 }

@@ -12,15 +12,10 @@
                 <a href="https://publica.io" class="pull-right">How to convert PBL tokens to Bitcoin, Litecoin, Dash, Ether or fiat?</a>
             </p>
         </div>
-
-        <p>
-            {{ user.email }}
-        </p>
     </div>
 </template>
 
 <script>
-import firebase from 'firebase';
 import Navigation from 'components/ui/navigation';
 
 export default {
