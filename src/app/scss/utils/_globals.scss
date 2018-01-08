@@ -16,9 +16,14 @@ html body {
     align-items: center;
     justify-content: center;
     margin: 0 0 40px 0;
+    padding: 10px;
  
     &.border {
         border-bottom: 2px solid $border-color;
+    }
+
+    &.center {
+        text-align: center;
     }
 
     .page-title {

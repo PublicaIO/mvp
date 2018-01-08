@@ -1,5 +1,10 @@
 <template>
     <div id="page-login">
+        <template v-if="error">
+            <p>
+                {{ error }}
+            </p>
+        </template>
         <p>
             <input type="text" v-model="email" placeholder="Email">
         </p>
@@ -22,7 +27,8 @@ export default {
     data() {
         return {
             email: 'thisis@example.com',
-            password: 'example'
+            password: 'example',
+            error: false
         }
     },
 
@@ -32,9 +38,10 @@ export default {
                 email: this.email,
                 password: this.password
             }).then((resp) => {
+                this.error = false;
                 window.location.href = '/';
             }).catch((error) => {
-                console.log(error);
+                this.error = error.response.data.message;
             });
         },
 
@@ -43,9 +50,11 @@ export default {
                 email: this.email,
                 password: this.password
             }).then((resp) => {
+                this.error = false;
                 this.login();
             }).catch((error) => {
                 console.log(error);
+                this.error = error.response.data.message;
             });
         }
     }

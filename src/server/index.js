@@ -2,12 +2,12 @@ require('dotenv').config();
 const path = require('path');
 const debug = require('debug')('express:view');
 const firebase = require('firebase');
+const firebaseConfig = require('./config/firebase');
+firebase.initializeApp(firebaseConfig); 
 const express = require('express');
 const router = require('./router');
 const bodyParser = require('body-parser');
 const app = express();
-const firebaseConfig = require('./config/firebase');
-firebase.initializeApp(firebaseConfig); 
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '..', 'app', 'views'));

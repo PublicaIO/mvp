@@ -1,7 +1,5 @@
 <template>
     <div id="page-dashboard">
-        <navigation></navigation>
-
         <div class="page-heading border">
             <h2 class="page-title">
                 My Funds
@@ -16,8 +14,6 @@
 </template>
 
 <script>
-import Navigation from 'components/ui/navigation';
-
 export default {
     data() {
         return {
@@ -29,10 +25,6 @@ export default {
         user() {
             return this.$store.state.user;
         }
-    },
-
-    components: {
-        Navigation
     }
 }
 </script>

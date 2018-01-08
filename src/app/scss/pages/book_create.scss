@@ -1,0 +1,19 @@
+#book-create {
+    padding: 10px;
+
+    .body {
+        max-width: 1024px;
+        margin: 0 auto;
+
+        h2 {
+            font-size: $heading-font-size;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin: 22px 0 11px 0;
+        }
+
+        .form-item {
+            margin: 0 0 20px 0;
+        }
+    }
+}

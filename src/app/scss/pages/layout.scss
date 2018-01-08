@@ -3,18 +3,23 @@
     flex-direction: column;
 
     .wrap {
-        width: 1024px;
-        margin: 0 auto;
-
-        .logotype {
-            display: block;
-            max-width: 300px;
+        &.login {
+            width: 1024px;
             margin: 0 auto;
+
+            .logotype {
+                display: block;
+                max-width: 300px;
+                margin: 0 auto;
+            }
         }
 
-        nav {
-            margin: 20px 0;
-            text-align: center;
+        &.user {
+            .logotype {
+                display: block;
+                max-width: 185px;
+                margin: 0 auto;
+            }
         }
     }
 }

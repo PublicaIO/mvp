@@ -55,7 +55,6 @@ const register = (req, res) => {
 
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then((resp) => {
-        console.log(resp);
         res.json({
             error: false
         });

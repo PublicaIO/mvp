@@ -1,5 +1,6 @@
 const express = require('express');
 const auth = require('../controller/auth');
+const book = require('../controller/book');
 
 module.exports = (() => {
     const router = express.Router();
@@ -13,8 +14,11 @@ module.exports = (() => {
     });
 
     router.post('/login', auth.login);
-    router.get('/logout', auth.logout);
     router.post('/register', auth.register);
+    router.get('/logout', auth.logout);
+
+    router.post('/book/save', book.save);
+    router.get('/book/:id', book.get);
 
     return router;
 })();
