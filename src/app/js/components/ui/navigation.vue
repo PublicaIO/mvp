@@ -7,7 +7,7 @@
         <nav class="header-section header-nav">
             <ul>
                 <li>
-                    <router-link to="/dashboard" class="button button-active-action">Dashboard</router-link>
+                    <router-link to="/user/dashboard" class="button button-active-action">Dashboard</router-link>
                 </li>
 
                 <li>
@@ -32,7 +32,7 @@ import axios from 'axios';
 export default {
     methods: {
         logout() {
-            axios.get('/logout')
+            axios.get('/user/logout')
                 .then((resp) => {
                     window.location.href = '/';
                 })

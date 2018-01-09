@@ -8,7 +8,8 @@ const save = (req, res) => {
 
     database.ref().update(updates).then((resp) => {
         res.json({
-            error: false
+            error: false,
+            book: newBookKey
         });
     }).catch((error) => {
         res.json({
@@ -24,10 +25,10 @@ const get = (req, res) => {
 
     database.ref(`/books/${bookID}`)
     .once('value')
-    .then((books) => {
+    .then((book) => {
         res.json({
             error: false,
-            body: books.val()
+            body: Object.assign({ id: book.key }, book.val())
         });
     }).catch((error) => {
         res.json({

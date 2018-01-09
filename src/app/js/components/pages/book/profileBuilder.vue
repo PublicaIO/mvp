@@ -18,7 +18,7 @@ export default {
         const bookID = this.$route.params.id;
 
         axios.get(`/book/${bookID}`).then((resp) => {
-            console.log(resp);
+            console.log(resp.data);
         }).catch((error) => {
             console.log(error);
         });

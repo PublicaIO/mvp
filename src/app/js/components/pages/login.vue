@@ -34,7 +34,7 @@ export default {
 
     methods: {
         login() {
-            axios.post('/login', {
+            axios.post('/user/login', {
                 email: this.email,
                 password: this.password
             }).then((resp) => {
@@ -46,14 +46,14 @@ export default {
         },
 
         register() {
-            axios.post('/register', {
+            axios.post('/user/register', {
                 email: this.email,
                 password: this.password
             }).then((resp) => {
                 this.error = false;
                 this.login();
             }).catch((error) => {
-                console.log(error);
+                console.error(error);
                 this.error = error.response.data.message;
             });
         }

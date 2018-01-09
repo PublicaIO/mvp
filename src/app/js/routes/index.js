@@ -1,10 +1,10 @@
 import Dashboard from 'components/pages/dashboard';
-import BookCreate from 'components/pages/bookCreate';
-import BookProfileBuilder from 'components/pages/bookProfileBuilder';
+import BookCreate from 'components/pages/book/create';
+import BookProfileBuilder from 'components/pages/book/profileBuilder';
 
 export default [
     {
-        path: '/dashboard',
+        path: '/user/dashboard',
         component: Dashboard,
         alias: '/'
     },

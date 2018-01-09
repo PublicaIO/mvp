@@ -10,21 +10,46 @@
                 <a href="https://publica.io" class="pull-right">How to convert PBL tokens to Bitcoin, Litecoin, Dash, Ether or fiat?</a>
             </p>
         </div>
+
+        <div class="books-list">
+            <p class="book-block" v-for="book in books" :key="book.id">
+                <router-link :to="`/book/${book.id}/build`">{{ book.book.title }}</router-link>
+            </p>
+        </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
+            books: [],
             pblBalance: '10000000000000000000000'
         }
     },
 
     computed: {
-        user() {
+        currentUser() {
             return this.$store.state.user;
         }
+    },
+
+    methods: {
+        getBooks() {
+            axios.get('/user/books')
+                .then((resp) => {
+                    this.books = resp.data.body;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    },
+
+    mounted() {
+        this.getBooks();
     }
 }
 </script>

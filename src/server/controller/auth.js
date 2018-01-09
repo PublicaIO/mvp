@@ -7,11 +7,15 @@ const isAuthenticated = (req, res, next) => {
         req.user = user;
         next();
     } else {
-        res.redirect('/login');
+        res.redirect('/user/login');
     }
 }
 
-const login = (req, res) => {
+const loginPage = (req, res) => {
+    res.render('login');
+};
+
+const loginRequest = (req, res) => {
     const user = {
         email: req.body.email,
         password: req.body.password
@@ -69,7 +73,8 @@ const register = (req, res) => {
 
 module.exports = {
     isAuthenticated,
-    login,
+    loginPage,
+    loginRequest,
     logout,
     register
 }
