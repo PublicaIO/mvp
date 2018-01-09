@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-item form-actions">
-                <button class="button button-large button-success" @click.prevent="saveProfile">Save</button>
+                <button class="button button-large button-active-action" @click.prevent="saveProfile">Save</button>
             </div>
         </div>
     </div>

@@ -1,0 +1,101 @@
+#page-ui-builder {
+    main {
+        width: 1024px;
+        margin: 0 auto;
+        padding: 10px;
+
+        .book-heading {
+            text-align: center;
+        }
+
+        section {
+            margin: 0 0 10px 0;
+            padding: 10px;
+            border-radius: 3px;
+
+            &.new-section {
+                h2 {
+                    text-align: center;
+                }
+
+                .new-section-block {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+
+                    .new-section-block-content {
+                        flex: 1 0 25%;
+                        padding: 5px;
+                    }
+                    
+                    p {
+                        border: 1px solid #000;
+                        border-radius: 3px;
+                        padding: 20px 0;
+                        cursor: pointer;
+
+                        &:hover {
+                            background: rgba(0, 0, 0, .1);
+                        }
+                    }
+                }
+            }
+    
+            &.multisection {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+    
+                .sub-section {
+                    flex: 1 0 33%;
+                    padding: 10px;
+    
+                    textarea {
+                        display: block;
+                        width: 100%;
+                        resize: none;
+                    }
+                }
+            }
+    
+            h2 {
+                margin: 0 0 10px 0;
+            }
+    
+            p {
+                margin: 0;
+            }
+    
+            &.new-section {
+                border: 1px dashed #000;
+                border-radius: 3px;
+    
+                .new-section-block {
+                    text-align: center;
+    
+                    .blocks-list {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex-wrap: wrap;
+    
+                        .block {
+                            flex: 0 0 23%;
+                            border: 1px solid #000;
+                            border-radius: 3px;
+                            padding: 5px 0;
+                            margin: 0 0 10px 0;
+                            transition: all .3s;
+    
+                            &:hover {
+                                background: rgba(0, 0, 0, .3);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

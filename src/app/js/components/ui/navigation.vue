@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="main-header">
         <div class="header-section header-logotype">
             <img src="/images/publica.svg" class="logotype">
         </div>
