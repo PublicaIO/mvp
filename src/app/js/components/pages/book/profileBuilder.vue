@@ -6,6 +6,7 @@
 
 <script>
 import axios from 'axios';
+import errorHandler from 'utils/errorHandler';
 
 export default {
     data() {
@@ -19,9 +20,7 @@ export default {
 
         axios.get(`/book/${bookID}`).then((resp) => {
             console.log(resp.data);
-        }).catch((error) => {
-            console.log(error);
-        });
+        }).catch(errorHandler);
     }
 }
 </script>

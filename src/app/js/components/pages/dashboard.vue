@@ -21,6 +21,7 @@
 
 <script>
 import axios from 'axios';
+import errorHandler from 'utils/errorHandler';
 
 export default {
     data() {
@@ -41,10 +42,7 @@ export default {
             axios.get('/user/books')
                 .then((resp) => {
                     this.books = resp.data.body;
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
+                }).catch(errorHandler);
         }
     },
 

@@ -1,4 +1,5 @@
 const firebase = require('firebase');
+const errorHandler = require('../utils/errorHandler');
 
 const isAuthenticated = (req, res, next) => {
     const user = firebase.auth().currentUser;
@@ -28,11 +29,7 @@ const loginRequest = (req, res) => {
             body: resp.providerData
         });
     }).catch((error) => {
-        res.status(500).json({
-            error: true,
-            code: error.code,
-            message: error.message
-        });
+        res.status(500).json(errorHandler);
     });
 };
 
@@ -43,11 +40,7 @@ const logout = (req, res) => {
             error: false
         });
     }).catch((error) => {
-        res.status(500).json({
-            error: true,
-            code: error.code,
-            message: error.message
-        });
+        res.status(500).json(errorHandler);
     });
 }
 
@@ -63,11 +56,7 @@ const register = (req, res) => {
             error: false
         });
     }).catch((error) => {
-        res.status(500).json({
-            error: true,
-            code: error.code,
-            message: error.message
-        });
+        res.status(500).json(errorHandler);
     });
 }
 

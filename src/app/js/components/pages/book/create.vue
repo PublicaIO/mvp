@@ -72,6 +72,7 @@
 import axios from 'axios';
 import pblUiFormField from 'components/ui/formField';
 import formatNumber from 'filters/formatNumber';
+import errorHandler from 'utils/errorHandler';
 
 export default {
     data() {
@@ -143,9 +144,7 @@ export default {
             .then((resp) => {
                 this.$router.push({ path: `/book/${resp.data.book}/build/` });
             })
-            .catch((error) => {
-                console.error(error);
-            });
+            .catch(errorHandler);
         }
     },
 

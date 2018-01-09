@@ -28,6 +28,7 @@
 
 <script>
 import axios from 'axios';
+import errorHandler from 'utils/errorHandler';
 
 export default {
     methods: {
@@ -36,9 +37,7 @@ export default {
                 .then((resp) => {
                     window.location.href = '/';
                 })
-                .catch((error) => {
-                    console.error(error);
-                });
+                .catch(errorHandler);
         }
     }
 }

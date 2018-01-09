@@ -1,4 +1,5 @@
 const firebase = require('firebase');
+const errorHandler = require('../utils/errorHandler');
 const database = firebase.database();
 
 const save = (req, res) => {
@@ -12,11 +13,7 @@ const save = (req, res) => {
             book: newBookKey
         });
     }).catch((error) => {
-        res.json({
-            error: true,
-            code: error.code,
-            message: error.message
-        });
+        res.status(500).json(errorHandler);
     });
 }
 
@@ -31,11 +28,7 @@ const get = (req, res) => {
             body: Object.assign({ id: book.key }, book.val())
         });
     }).catch((error) => {
-        res.json({
-            error: true,
-            code: error.code,
-            message: error.message
-        })
+        res.status(500).json(errorHandler);
     });
 }
 
