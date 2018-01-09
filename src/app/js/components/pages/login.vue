@@ -5,23 +5,27 @@
                 {{ error }}
             </p>
         </template>
+
         <p>
-            <input type="text" v-model="email" placeholder="Email">
+            <pbl-ui-form-field :init-value="email" id="email" title="Your Email" type="input" @changed="email = arguments[0]">
+            </pbl-ui-form-field>
         </p>
 
         <p>
-            <input type="password" v-model="password" placeholder="Password">
+            <pbl-ui-form-field :init-value="password" id="password" title="Your Password" type="password" @changed="password = arguments[0]">
+            </pbl-ui-form-field>
         </p>
 
         <p>
-            <button @click="login">Login</button>
-            <button @click="register">Register</button>
+            <button class="button button-large button-success" @click="login">Login</button>
+            <button class="button button-large button-active-action" @click="register">Register</button>
         </p>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import pblUiFormField from 'components/ui/formField';
 
 export default {
     data() {
@@ -57,6 +61,10 @@ export default {
                 this.error = error.response.data.message;
             });
         }
+    },
+
+    components: {
+        pblUiFormField
     }
 }
 </script>

@@ -1,6 +1,10 @@
 <template>
     <div id="profile-builder">
-        Hello world
+        <div class="page-heading center">
+            <h2 class="page-title">
+                Build profile page for your book
+            </h2>
+        </div>
     </div>
 </template>
 

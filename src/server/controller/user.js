@@ -1,4 +1,5 @@
 const firebase = require('firebase');
+const errorHandler = require('../utils/errorHandler');
 const database = firebase.database();
 
 const getBooks = (req, res) => {
@@ -31,11 +32,37 @@ const getBooks = (req, res) => {
     } else {
         res.status(500).json({
             error: true,
-            code: 'PERMISSION_DENIED'
+            code: 'BACK_TO_LOGIN'
         });
     }
 };
 
+const getProfile = (req, res) => {
+    const user = firebase.auth().currentUser;
+
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(500).json({
+            error: true,
+            code: 'BACK_TO_LOGIN'
+        });
+    }
+}
+
+const saveProfile = (req, res) => {
+    const currentUser = firebase.auth().currentUser;
+    const userData = req.body;
+
+    currentUser.updateProfile(userData).then((resp) => {
+        res.json({
+            error: false
+        });
+    }).catch(errorHandler);
+}
+
 module.exports = {
-    getBooks
+    getBooks,
+    getProfile,
+    saveProfile
 }

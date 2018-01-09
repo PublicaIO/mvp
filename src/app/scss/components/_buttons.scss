@@ -1,5 +1,10 @@
+button {
+    cursor: pointer;
+}
+
 a.button,
 .button {
+    cursor: pointer;
     color: $main-simple-color;
     padding: 12px 20px;
     border-radius: 3px;

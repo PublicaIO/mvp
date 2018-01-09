@@ -11,6 +11,8 @@ module.exports = (() => {
     router.get('/logout', auth.logout);
 
     router.get('/books', user.getBooks);
+    router.get('/profile', user.getProfile);
+    router.post('/profile/save', user.saveProfile);
 
     return router;
 })();

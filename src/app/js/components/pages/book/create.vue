@@ -141,10 +141,9 @@ export default {
                 book: this.book,
                 crowdfunding: this.crowdfunding
             })
-            .then((resp) => {
-                this.$router.push({ path: `/book/${resp.data.book}/build/` });
-            })
-            .catch(errorHandler);
+                .then((resp) => {
+                    this.$router.push({ path: `/book/${resp.data.book}/build/` });
+                }).catch(errorHandler);
         }
     },
 

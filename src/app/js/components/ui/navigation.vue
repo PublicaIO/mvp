@@ -15,7 +15,11 @@
                 </li>
 
                 <li>
-                    <a href="#!" class="button button-active-action" @click.prevent="logout">Logout</a>
+                    <router-link to="/user/profile" class="button button-active-action">Profile</router-link>
+                </li>
+
+                <li>
+                    <a href="#!" class="button button-passive-action" @click.prevent="logout">Logout</a>
                 </li>
             </ul>
         </nav>

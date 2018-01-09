@@ -1,5 +1,6 @@
 const firebase = require('firebase');
 const errorHandler = require('../utils/errorHandler');
+const database = firebase.database();
 
 const isAuthenticated = (req, res, next) => {
     const user = firebase.auth().currentUser;
