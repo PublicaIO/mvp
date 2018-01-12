@@ -1,0 +1,26 @@
+.edit-input {
+    .edit-input-title {
+        span {
+            color: $primary-color;
+            cursor: pointer;
+        }
+    }
+    .edit-input-body {
+        display: flex;
+        flex-direction: column;
+
+        p {
+            flex: 1 1 auto;
+
+            input {
+                display: block;
+                width: 100%;
+            }
+
+            button {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+}

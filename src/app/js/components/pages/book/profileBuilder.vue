@@ -17,13 +17,15 @@
                 </header>
             </div>
 
-            <section v-for="(section, index) in sections" :key="index">
-                <!-- <div :is="section.component"></div> -->
-                <div>
-                    <ui-editable-input :init-value="section.title" @saved="section.title = arguments[0]"></ui-editable-input>
-                    <p>{{ section.component }}</p>
-                </div>
-            </section>
+            <draggable v-model="sections" @start="drag=true" @end="drag=false">
+                <section v-for="(section, index) in sections" :key="index">
+                    <!-- <div :is="section.component"></div> -->
+                    <div>
+                        <ui-editable-input custom-class="section-title" :init-value="section.title" @saved="section.title = arguments[0]"></ui-editable-input>
+                        <p>{{ section.component }}</p>
+                    </div>
+                </section>
+            </draggable>
 
             <section class="new-section">
                 <h2>Add Widget</h2>
@@ -45,11 +47,13 @@ import axios from 'axios';
 import errorHandler from 'utils/errorHandler';
 import widgetCountdown from 'components/pages/book/widgets/countdown';
 import uiEditableInput from 'components/ui/editableInput';
+import draggable from 'vuedraggable';
 
 export default {
     data() {
         return {
             sections: [],
+            drag: false,
 
             widgets: [
                 {
@@ -135,7 +139,8 @@ export default {
 
     components: {
         widgetCountdown,
-        uiEditableInput
+        uiEditableInput,
+        draggable
     }
 }
 </script>
