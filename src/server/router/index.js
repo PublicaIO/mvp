@@ -9,9 +9,13 @@ module.exports = (() => {
     const router = express.Router();
 
     router.get('/', auth.isAuthenticated, (req, res) => {
-        res.render('index', {
-            user: firebase.auth().currentUser.uid
-        });
+        const currentUser = firebase.auth().currentUser;
+        const user = {
+            id: currentUser.uid,
+            displayName: currentUser.displayName,
+            email: currentUser.email
+        }
+        res.render('index', { user });
     });
 
     router.use('/user', userRoutes);

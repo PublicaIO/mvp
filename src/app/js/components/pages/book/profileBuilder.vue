@@ -4,7 +4,7 @@
             <div class="book-view-wrapper">
                 <header class="book-heading">
                     <h4>
-                        The next book by Dade Murphy
+                        The next book by <strong>Dade Murphy</strong>
                     </h4>
 
                     <h1 class="book-title">
@@ -20,7 +20,7 @@
             <section v-for="(section, index) in sections" :key="index">
                 <!-- <div :is="section.component"></div> -->
                 <div>
-                    <h4>{{ section.title }}</h4>
+                    <ui-editable-input :init-value="section.title" @saved="section.title = arguments[0]"></ui-editable-input>
                     <p>{{ section.component }}</p>
                 </div>
             </section>
@@ -43,6 +43,8 @@
 <script>
 import axios from 'axios';
 import errorHandler from 'utils/errorHandler';
+import widgetCountdown from 'components/pages/book/widgets/countdown';
+import uiEditableInput from 'components/ui/editableInput';
 
 export default {
     data() {
@@ -129,7 +131,11 @@ export default {
         axios.get(`/book/${bookID}`).then((resp) => {
             console.log(resp.data);
         }).catch(errorHandler);
+    },
+
+    components: {
+        widgetCountdown,
+        uiEditableInput
     }
 }
 </script>
-
