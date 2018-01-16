@@ -1,5 +1,4 @@
 const firebase = require('firebase');
-const errorHandler = require('../utils/errorHandler');
 const database = firebase.database();
 
 const getBooks = (req, res) => {
@@ -16,24 +15,12 @@ const getBooks = (req, res) => {
                 }
             });
 
-            res.json({
-                error: false,
-                body: books
-            });
+            res.success({ books });
             
         })
-        .catch((error) => {
-            res.status(500).json({
-                error: true,
-                code: error.code,
-                message: error.message
-            });
-        });
+        .catch((error) => res.error(error.code, error.message));
     } else {
-        res.status(500).json({
-            error: true,
-            code: 'BACK_TO_LOGIN'
-        });
+        res.error('BACK_TO_LOGIN');
     }
 };
 
@@ -41,44 +28,21 @@ const getProfile = (req, res) => {
     const user = firebase.auth().currentUser;
 
     if (user) {
-        res.json(user);
+        res.success({ user });
     } else {
-        res.status(500).json({
-            error: true,
-            code: 'BACK_TO_LOGIN'
-        });
+        res.error('BACK_TO_LOGIN');
     }
 }
 
 const saveProfile = (req, res) => {
     const currentUser = firebase.auth().currentUser;
     const userData = req.body;
-
-    currentUser.updateProfile(userData).then((resp) => {
-        res.json({
-            error: false
-        });
-    }).catch(errorHandler);
-}
-
-const createProfile = (req, res) => {
-    const newUserKey = database.ref().child('users').push().key;
-    const updates = {};
-    updates[`/users/${newUserKey}`] = req.body;
-
-    database.ref().update(updates).then((resp) => {
-        res.json({
-            error: false,
-            user: newUserKey
-        });
-    }).catch((error) => {
-        res.status(500).json(errorHandler);
-    });
+    
+    // @TODO: implement
 }
 
 module.exports = {
     getBooks,
     getProfile,
     saveProfile,
-    createProfile
 }

@@ -1,20 +1,14 @@
 const firebase = require('firebase');
-const errorHandler = require('../utils/errorHandler');
 const database = firebase.database();
 
 const save = (req, res) => {
-    const newBookKey = database.ref().child('books').push().key;
+    const bookKey = database.ref().child('books').push().key;
     const updates = {};
-    updates[`/books/${newBookKey}`] = req.body;
+    updates[`/books/${bookKey}`] = req.body;
 
-    database.ref().update(updates).then((resp) => {
-        res.json({
-            error: false,
-            book: newBookKey
-        });
-    }).catch((error) => {
-        res.status(500).json(errorHandler);
-    });
+    database.ref().update(updates)
+    .then((resp) => res.success({ bookKey }))
+    .catch((error) => res.error(error.code, error.message));
 }
 
 const get = (req, res) => {
@@ -22,14 +16,8 @@ const get = (req, res) => {
 
     database.ref(`/books/${bookID}`)
     .once('value')
-    .then((book) => {
-        res.json({
-            error: false,
-            body: Object.assign({ id: book.key }, book.val())
-        });
-    }).catch((error) => {
-        res.status(500).json(errorHandler);
-    });
+    .then((book) => res.success({ book: Object.assign({ id: book.key }, book.val()) }))
+    .catch((error) => res.error(error.code, error.message));
 }
 
 module.exports = {

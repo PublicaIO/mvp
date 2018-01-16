@@ -41,7 +41,7 @@ export default {
         getBooks() {
             axios.get('/user/books')
                 .then((resp) => {
-                    this.books = resp.data.body;
+                    this.books = resp.data.books;
                 }).catch(errorHandler);
         }
     },

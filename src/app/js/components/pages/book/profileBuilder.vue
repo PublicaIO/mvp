@@ -133,7 +133,7 @@ export default {
         const bookID = this.$route.params.id;
 
         axios.get(`/book/${bookID}`).then((resp) => {
-            console.log(resp.data);
+            console.log(resp.data.book);
         }).catch(errorHandler);
     },
 
