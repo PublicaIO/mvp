@@ -29,7 +29,8 @@ const loginRequest = (req, res) => {
             error: false,
             body: resp.providerData
         });
-    }).catch((error) => {
+    })
+    .catch((error) => {
         res.status(500).json(errorHandler);
     });
 };
@@ -40,25 +41,45 @@ const logout = (req, res) => {
         res.json({
             error: false
         });
-    }).catch((error) => {
+    })
+    .catch((error) => {
         res.status(500).json(errorHandler);
     });
 }
 
 const register = (req, res) => {
     const user = {
-        email: req.body.email,
-        password: req.body.password
+        email: req.body.user_register.email,
+        password: req.body.user_register.password,
+        firstname: req.body.user_register.firstname,
+        lastname: req.body.user_register.lastname,
+        displayname: `${req.body.user_register.firstname} ${req.body.user_register.lastname}`
     }
 
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then((resp) => {
-        res.json({
-            error: false
+        updateProfile({
+            displayName: user.displayname,
+            firstname: user.firstname,
+            lastname: user.lastname
+        })
+        .then(() => {
+            res.json({
+                error: false
+            });
+        })
+        .catch((error) => {
+            res.status(500).json(errorHandler);
         });
-    }).catch((error) => {
+    })
+    .catch((error) => {
         res.status(500).json(errorHandler);
     });
+}
+
+const updateProfile = (userData) => {
+    const user = firebase.auth().currentUser;
+    return user.updateProfile(userData);
 }
 
 module.exports = {

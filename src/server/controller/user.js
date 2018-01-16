@@ -61,8 +61,24 @@ const saveProfile = (req, res) => {
     }).catch(errorHandler);
 }
 
+const createProfile = (req, res) => {
+    const newUserKey = database.ref().child('users').push().key;
+    const updates = {};
+    updates[`/users/${newUserKey}`] = req.body;
+
+    database.ref().update(updates).then((resp) => {
+        res.json({
+            error: false,
+            user: newUserKey
+        });
+    }).catch((error) => {
+        res.status(500).json(errorHandler);
+    });
+}
+
 module.exports = {
     getBooks,
     getProfile,
-    saveProfile
+    saveProfile,
+    createProfile
 }
