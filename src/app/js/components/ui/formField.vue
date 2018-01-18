@@ -2,7 +2,10 @@
     <div class="form-field">
         <template v-if="description">
             <div class="input-description" :class="{ disabled }">
-                <label :for="id">{{ title }}</label>
+                <label :for="id">
+                    {{ title }}
+                    <p class="badge" v-if="info">i<span>{{ info }}</span></p>
+                </label>
 
                 <div class="input-block">
                     <div class="input-field">
@@ -20,7 +23,10 @@
 
         <template v-else>
             <div class="input" :class="{ disabled }">
-                <label :for="id">{{ title }}</label>
+                <label :for="id">
+                    {{ title }}
+                    <p class="badge" v-if="info">i<span>{{ info }}</span></p>
+                </label>
 
                 <template v-if="type !== 'textarea'">
                     <input :id="id" :type="type" v-model="value" @keyup="returnValue" :disabled="disabled">
@@ -71,6 +77,12 @@ export default {
         },
 
         symbol: {
+            required: false,
+            type: String,
+            default: null
+        },
+
+        info: {
             required: false,
             type: String,
             default: null

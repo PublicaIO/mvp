@@ -1,0 +1,33 @@
+.badge {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 9px;
+    margin: 0;
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    line-height: 15px;
+    top: -2px;
+    background: $primary-color;
+    color: $main-simple-color;
+    text-transform: lowercase;
+
+    span {
+        display: none;
+        position: absolute;
+        top: calc(-100% - 15px);
+        background: $primary-color;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    &:hover {
+        span {
+            display: block;
+        }
+    }
+}

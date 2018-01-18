@@ -5,11 +5,11 @@
                 {{ error }}
             </p>
         </template>
-
+        <button @click="loginFB">FB LOGIN</button>
         <div class="login-auth">
             <section class="section-login">
                 <p>
-                    <pbl-ui-form-field :init-value="user_login.email" id="login_email" title="E-mail" type="input" @changed="user_login.email = arguments[0]">
+                    <pbl-ui-form-field info="test" :init-value="user_login.email" id="login_email" title="E-mail" type="input" @changed="user_login.email = arguments[0]">
                     </pbl-ui-form-field>
                 </p>
 
@@ -80,6 +80,10 @@ export default {
     },
 
     methods: {
+        loginFacebook() {
+            
+        },
+
         login(fromRegistration = false) {
             const loginData = {
                 email: fromRegistration ? this.user_register.email : this.user_login.email,
