@@ -8,6 +8,12 @@ export default {
             default() {
                 return false;
             }
+        },
+        isSocial: {
+            required: false,
+            default() {
+                return false;
+            }
         }
     },
 
@@ -19,6 +25,7 @@ export default {
 
     created() {
         this.$store.commit('setUser', this.user);
+        this.$store.commit('setSocial', this.isSocial);
     },
 
     components: {

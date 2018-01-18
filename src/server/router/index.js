@@ -10,16 +10,17 @@ module.exports = (() => {
 
     router.get('/', auth.isAuthenticated, (req, res) => {
         const currentUser = firebase.auth().currentUser;
+        const isSocial = currentUser && currentUser.providerData[0].providerId !== 'password';
         const user = {
             id: currentUser.uid,
             displayName: currentUser.displayName,
             email: currentUser.email
         }
-        res.render('index', { user });
+        res.render('index', { data: { user, isSocial } });
     });
 
     router.use('/user', userRoutes);
-    router.use('/book', bookRoutes);
+    // router.use('/book', bookRoutes);
 
     return router;
 })();

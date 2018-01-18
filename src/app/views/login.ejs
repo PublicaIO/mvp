@@ -7,6 +7,10 @@
     <title>Publica MVP</title>
 </head>
 <body>
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
+        api_key: 86r089rc27hf25
+        onLoad: onLinkedInLoad
+    </script>
     <div id="app">
         <div class="wrap login">
             <img src="/images/publica.svg" class="logotype">
@@ -15,6 +19,24 @@
         </div>
     </div>
 
+    <script src="//connect.facebook.net/en_US/sdk.js"></script>
+    <script type="text/javascript">
+        function getProfileData(a) {
+            IN.User.refresh(console.log)
+        }
+        // Setup an event listener to make an API call once auth is complete
+        function onLinkedInLoad() {
+            IN.Event.on(IN, 'auth', console.log);
+        }
+        // Handle the successful return from the API call
+        function onSuccess(data) {
+            console.log('asdf', data);
+        }
+        // Handle an error response from the API call
+        function onError(error) {
+            console.log('fdas', error);
+        }
+    </script>
     <script src="/js/login.js"></script>
 </body>
 </html>

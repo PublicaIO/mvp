@@ -28,6 +28,14 @@ const loginRequest = (req, res) => {
     .catch((error) => res.error(error.code, error.message));
 };
 
+const loginSocial = (req, res) => {
+    const token = req.body.auth.accessToken;
+    const credential = firebase.auth.FacebookAuthProvider.credential(token);
+    firebase.auth().signInWithCredential(credential)
+    .then((resp) => res.success())
+    .catch((error) => res.error(error.code, error.message));
+}
+
 const logout = (req, res) => {
     firebase.auth().signOut()
     .then((resp) => res.success())
@@ -74,6 +82,7 @@ module.exports = {
     isAuthenticated,
     loginPage,
     loginRequest,
+    loginSocial,
     logout,
     register
 }

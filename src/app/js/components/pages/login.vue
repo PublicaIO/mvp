@@ -1,11 +1,15 @@
 <template>
     <div id="page-login">
+        <h1>Sign in to Publica</h1>
         <template v-if="error">
             <p>
                 {{ error }}
             </p>
         </template>
-        <button @click="loginFB">FB LOGIN</button>
+
+        <fb:login-button onlogin="checkLoginState" data-auto-logout-link="false" data-button-type="continue_with" scope="public_profile,email" size="medium" v-pre></fb:login-button>
+        <script type="in/Login" v-pre></script>
+
         <div class="login-auth">
             <section class="section-login">
                 <p>
@@ -80,8 +84,22 @@ export default {
     },
 
     methods: {
-        loginFacebook() {
-            
+        checkLD() {
+            console.log('asdf');
+            IN.User.authorize(() => console.log);
+        },
+
+        checkLoginState(event) {
+            if (event.status === 'connected') {
+                axios.post('/user/loginsocial', { auth: event.authResponse })
+                    .then((resp) => {
+                        this.error = false;
+                        window.location.href = '/';
+                    })
+                    .catch((error) => {
+                        this.error = error.response.data.message;
+                    });
+            }
         },
 
         login(fromRegistration = false) {
@@ -109,9 +127,12 @@ export default {
         }
     },
 
+    created() {
+        window.checkLoginState = this.checkLoginState;
+    },
+
     components: {
         pblUiFormField
     }
 }
 </script>
-

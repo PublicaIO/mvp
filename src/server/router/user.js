@@ -9,10 +9,11 @@ module.exports = (() => {
     router.post('/login', auth.loginRequest);
     router.post('/register', auth.register);
     router.get('/logout', auth.logout);
+    router.post('/loginsocial', auth.loginSocial);
 
-    router.get('/books', user.getBooks);
-    router.get('/profile', user.getProfile);
-    router.post('/profile/save', user.saveProfile);
+    // router.get('/books', user.getBooks);
+    // router.get('/profile', user.getProfile);
+    // router.post('/profile/save', user.saveProfile);
 
     return router;
 })();
