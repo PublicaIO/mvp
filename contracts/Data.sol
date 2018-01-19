@@ -3,7 +3,7 @@ pragma solidity ^0.4.18;
 contract Data {
 
     // Trusted account that can update rates
-    address owner;
+    address public owner;
 
     // Holds rates how many fiat currency 1 PBL costs (e.g. EUR => 1.43e18)
     mapping (bytes3 => uint) public rates;
