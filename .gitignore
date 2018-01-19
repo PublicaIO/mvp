@@ -3,3 +3,4 @@ public/
 !public/images
 npm-debug.log
 .env
+config/firebase-admin.json
