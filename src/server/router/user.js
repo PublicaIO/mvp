@@ -1,6 +1,8 @@
+const path = require('path');
 const express = require('express');
 const auth = require('../controller/auth');
 const user = require('../controller/user');
+const authRouter = require('./auth');
 
 module.exports = (() => {
     const router = express.Router();
@@ -9,11 +11,8 @@ module.exports = (() => {
     router.post('/login', auth.loginRequest);
     router.post('/register', auth.register);
     router.get('/logout', auth.logout);
-    router.post('/loginsocial', auth.loginSocial);
-
-    // router.get('/books', user.getBooks);
-    // router.get('/profile', user.getProfile);
-    // router.post('/profile/save', user.saveProfile);
+    router.use('/auth', authRouter);
+    router.post('/save-email', user.saveEmail);
 
     return router;
 })();

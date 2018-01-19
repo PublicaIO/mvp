@@ -25,32 +25,5 @@ new Vue({
     store,
     components: {
         App
-    },
-    methods: {
-        logoutAction() {
-            axios.get('/user/logout')
-                .then((resp) => {
-                    window.location.href = '/';
-                })
-                .catch(errorHandler);
-        },
-
-        logout() {
-            if (this.isSocial) {
-                FB.logout(resp => this.logoutAction());
-            } else {
-                this.logoutAction();
-            }
-        }
-    },
-    mounted() {
-        if (this.isSocial) {
-            FB.init({
-                appId: '174059883202740',
-                status: true,
-                xfbml: true,
-                version: 'v2.6'
-            });
-        }
     }
 }).$mount('#app');

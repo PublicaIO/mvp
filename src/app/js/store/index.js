@@ -11,6 +11,10 @@ export default {
 
         setSocial(state, isSocial) {
             state.isSocial = isSocial;
+        },
+
+        setUserEmail(state, email) {
+            state.user.email = email;
         }
     }
 };

@@ -1,4 +1,11 @@
 #page-dashboard {
+    .dashboard-content {
+        button {
+            display: block;
+            width: 100%;
+        }
+    }
+
     .books-list {
         max-width: 1024px;
         margin: 0 auto;

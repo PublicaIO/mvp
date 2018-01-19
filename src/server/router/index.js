@@ -10,7 +10,7 @@ module.exports = (() => {
 
     router.get('/', auth.isAuthenticated, (req, res) => {
         const currentUser = firebase.auth().currentUser;
-        const isSocial = currentUser && currentUser.providerData[0].providerId !== 'password';
+        const isSocial = currentUser && currentUser.providerData.length > 0 && currentUser.providerData[0].providerId !== 'password';
         const user = {
             id: currentUser.uid,
             displayName: currentUser.displayName,

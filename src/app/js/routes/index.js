@@ -10,16 +10,8 @@ export default [
         component: UserDashboard,
         alias: '/'
     },
-    // {
-    //     path: '/user/profile',
-    //     component: UserProfile
-    // },
-    // {
-    //     path: '/book/create',
-    //     component: BookCreate
-    // },
-    // {
-    //     path: '/book/:id/build/',
-    //     component: BookProfileBuilder
-    // }
+    {
+        path: '*',
+        component: UserDashboard
+    }
 ];

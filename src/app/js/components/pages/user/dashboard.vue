@@ -2,34 +2,47 @@
     <div id="page-dashboard">
         <div class="page-heading border">
             <div class="page-heading-content wrapper">
-                <h2 class="page-title">
-                    My Funds
-                    <p>PBL tokens: <span>{{ `${pblBalance}` | convertFromWei | formatNumber }}</span> (estimated $<span>{{ `${pblBalance}` | convertFromWei | convertToFiat | formatNumber }}</span>)</p>
+                <h2 class="page-title center">
+                    Author dashboard
                 </h2>
-
-                <p class="page-actions">
-                    <a href="https://publica.io" class="pull-right">How to convert PBL tokens to Bitcoin, Litecoin, Dash, Ether or fiat?</a>
-                </p>
             </div>
         </div>
 
-        <div class="books-list">
-            <p class="book-block" v-for="book in books" :key="book.id">
-                <router-link :to="`/book/${book.id}/build`">{{ book.book.title }}</router-link>
-            </p>
+        <div class="dashboard-content mini-wrapper">
+            <template v-if="!currentUser.email">
+                <p>
+                    It seems like we are missing your e-mail, please share it with us!
+                </p>
+
+                <p v-if="error">
+                    {{ error }}
+                </p>
+
+                <pbl-ui-form-field :init-value="email" id="user_email" title="E-mail" type="input" @changed="email = arguments[0]">
+                </pbl-ui-form-field>
+
+                <p>
+                    <button class="button button-large button-success" @click="save()">Save</button>
+                </p>
+            </template>
+
+            <template v-else>
+                Author Dashboard will be ready anytime soon, we will keep you up to date!
+            </template>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import pblUiFormField from 'components/ui/formField';
 import errorHandler from 'utils/errorHandler';
 
 export default {
     data() {
         return {
-            books: [],
-            pblBalance: '10000000000000000000000'
+            error: false,
+            email: null
         }
     },
 
@@ -40,16 +53,17 @@ export default {
     },
 
     methods: {
-        getBooks() {
-            axios.get('/user/books')
-                .then((resp) => {
-                    this.books = resp.data.books;
-                }).catch(errorHandler);
+        save() {
+            axios.post('/user/save-email', { email: this.email })
+                .then(() => this.$store.commit('setUserEmail', this.email))
+                .catch((error) => {
+                    this.error = error.response.data.message;
+                });
         }
     },
 
-    mounted() {
-        // this.getBooks();
+    components: {
+        pblUiFormField
     }
 }
 </script>

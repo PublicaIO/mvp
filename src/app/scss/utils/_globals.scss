@@ -39,6 +39,10 @@ h1, h2, h3, h4, h5, h6 {
             font-weight: 300;
             margin: 22px 0 11px 0;
 
+            &.center {
+                text-align: center;
+            }
+
             p {
                 font-size: $label-font-size;
                 margin: 10px 0 0 0;
@@ -67,5 +71,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .wrapper {
     max-width: 1024px;
+    margin: 0 auto;
+}
+
+.mini-wrapper {
+    max-width: 400px;
     margin: 0 auto;
 }

@@ -1,17 +1,82 @@
 #page-login {
     text-align: center;
 
+    h4 {
+        border-bottom: 2px solid $secondary-color;
+    }
+
+    .separate {
+        position: relative;
+        border-bottom: 1px solid $secondary-color;
+        height: 13px;
+
+        span {
+            position: absolute;
+            left: 50%;
+            margin-left: -20px;
+            background: #fff;
+            padding: 0 10px;
+        }
+    }
+
+    .login-actions {
+        a {
+            color: $primary-color;
+            text-decoration: none;
+        }
+    }
+
     .login-auth {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
 
         section {
-            flex: 0 1 49%;
+            flex: 0 1 50%;
+
+            button {
+                display: block;
+                width: 100%;
+            }
 
             .input {
                 text-align: left;
             }
         }
+    }
+
+    .social-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0;
+        text-align: center;
+        border-radius: 3px;
+        text-decoration: none;
+
+        span {
+            display: block;
+        }
+
+        img {
+            display: block;
+            width: 20px;
+            margin-right: 10px;
+        }
+    }
+
+    .button-facebook {
+        background: #3b5998;
+        color: #fff;
+    }
+
+    .button-linkedin {
+        background: #0077b5;
+        color: #fff;
+    }
+
+    .button-goodreads {
+        background: #663300;
+        color: #fff;
     }
 }

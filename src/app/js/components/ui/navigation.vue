@@ -8,11 +8,11 @@
             <nav class="header-section header-nav">
                 <div class="wrapper">
                     <ul>
+                        <!--
                         <li>
                             <router-link to="/user/dashboard" class="button button-active-action">Dashboard</router-link>
                         </li>
 
-                        <!--
                         <li>
                             <router-link to="/book/create" class="button button-success">Create Book</router-link>
                         </li>

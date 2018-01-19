@@ -1,4 +1,7 @@
+const path = require('path');
 const firebase = require('firebase');
+const firebaseAdmin = require('firebase-admin');
+const auth = require('../controller/auth');
 const userSchema = require('../schema/user');
 const database = firebase.database();
 
@@ -13,9 +16,7 @@ const isAuthenticated = (req, res, next) => {
     }
 }
 
-const loginPage = (req, res) => {
-    res.render('login');
-};
+const loginPage = (req, res) => res.render('login');
 
 const loginRequest = (req, res) => {
     const user = {
@@ -27,14 +28,6 @@ const loginRequest = (req, res) => {
     .then((resp) => res.success(resp.providerData))
     .catch((error) => res.error(error.code, error.message));
 };
-
-const loginSocial = (req, res) => {
-    const token = req.body.auth.accessToken;
-    const credential = firebase.auth.FacebookAuthProvider.credential(token);
-    firebase.auth().signInWithCredential(credential)
-    .then((resp) => res.success())
-    .catch((error) => res.error(error.code, error.message));
-}
 
 const logout = (req, res) => {
     firebase.auth().signOut()
@@ -50,7 +43,6 @@ const register = (req, res) => {
         lastname: req.body.user_register.lastname
     }
 
-    // Perform additional user data validation before creating db record.
     if (!userSchema.validate(user)) {
         return res.error('DATA_VALIDATION', 'Validation errors');
     }
@@ -82,7 +74,6 @@ module.exports = {
     isAuthenticated,
     loginPage,
     loginRequest,
-    loginSocial,
     logout,
     register
 }

@@ -16,7 +16,6 @@ const getBooks = (req, res) => {
             });
 
             res.success({ books });
-            
         })
         .catch((error) => res.error(error.code, error.message));
     } else {
@@ -34,15 +33,24 @@ const getProfile = (req, res) => {
     }
 }
 
+const saveEmail = (req, res) => {
+    const currentUser = firebase.auth().currentUser;
+    const email = req.body.email;
+
+    currentUser.updateEmail(email)
+    .then(() => res.success())
+    .catch((error) => res.error(error.code, error.message));
+}
+
 const saveProfile = (req, res) => {
+    // @TODO: implement
     const currentUser = firebase.auth().currentUser;
     const userData = req.body;
-    
-    // @TODO: implement
 }
 
 module.exports = {
     getBooks,
     getProfile,
     saveProfile,
+    saveEmail
 }

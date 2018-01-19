@@ -1,19 +1,44 @@
 <template>
     <div id="page-login">
         <h1>Sign in to Publica</h1>
-        <template v-if="error">
-            <p>
-                {{ error }}
-            </p>
-        </template>
 
-        <fb:login-button onlogin="checkLoginState" data-auto-logout-link="false" data-button-type="continue_with" scope="public_profile,email" size="medium" v-pre></fb:login-button>
-        <script type="in/Login" v-pre></script>
+        <p>
+            <a class="social-button button-facebook" href="/user/auth/facebook">
+                <img src="/images/facebook.svg" alt="Facebook">
+                <span>Continue with Facebook</span>
+            </a>
+        </p>
+
+        <p>
+            <a class="social-button button-linkedin" href="/user/auth/linkedin">
+                <img src="/images/linkedin.svg" alt="LinkedIn">
+                <span>Continue with LinkedIn</span>
+            </a>
+        </p>
+
+        <p>
+            <a class="social-button button-goodreads" href="/user/auth/goodreads">
+                <img src="/images/goodreads.svg" alt="GoodReads">
+                <span>Continue with GoodReads</span>
+            </a>
+        </p>
+
+        <p class="separate">
+            <span>or</span>
+        </p>
 
         <div class="login-auth">
-            <section class="section-login">
+            <section>
+                <template v-if="error">
+                    <p>
+                        {{ error }}
+                    </p>
+                </template>
+            </section>
+
+            <section class="section-login" v-if="!registerStep">
                 <p>
-                    <pbl-ui-form-field info="test" :init-value="user_login.email" id="login_email" title="E-mail" type="input" @changed="user_login.email = arguments[0]">
+                    <pbl-ui-form-field :init-value="user_login.email" id="login_email" title="E-mail" type="input" @changed="user_login.email = arguments[0]">
                     </pbl-ui-form-field>
                 </p>
 
@@ -27,7 +52,7 @@
                 </p>
             </section>
 
-            <section class="section-register">
+            <section class="section-register" v-if="registerStep">
                 <p>
                     <pbl-ui-form-field :init-value="user_register.firstname" id="reg_firstname" title="Name" type="input" @changed="user_register.firstname = arguments[0]">
                     </pbl-ui-form-field>
@@ -57,6 +82,13 @@
                     <button class="button button-large button-active-action" @click="register">Register</button>
                 </p>
             </section>
+
+            <section class="login-actions">
+                <p>
+                    <a href="#" @click.prevent="registerStep = true" v-if="!registerStep">Registration</a>
+                    <a href="#" @click.prevent="registerStep = false" v-if="registerStep">Login</a>
+                </p>
+            </section>
         </div>
     </div>
 </template>
@@ -68,6 +100,7 @@ import pblUiFormField from 'components/ui/formField';
 export default {
     data() {
         return {
+            registerStep: false,
             user_login: {
                 email: 'thisis@example.com',
                 password: 'example'
@@ -84,24 +117,6 @@ export default {
     },
 
     methods: {
-        checkLD() {
-            console.log('asdf');
-            IN.User.authorize(() => console.log);
-        },
-
-        checkLoginState(event) {
-            if (event.status === 'connected') {
-                axios.post('/user/loginsocial', { auth: event.authResponse })
-                    .then((resp) => {
-                        this.error = false;
-                        window.location.href = '/';
-                    })
-                    .catch((error) => {
-                        this.error = error.response.data.message;
-                    });
-            }
-        },
-
         login(fromRegistration = false) {
             const loginData = {
                 email: fromRegistration ? this.user_register.email : this.user_login.email,
@@ -125,10 +140,6 @@ export default {
                 this.error = error.response.data.message;
             });
         }
-    },
-
-    created() {
-        window.checkLoginState = this.checkLoginState;
     },
 
     components: {
