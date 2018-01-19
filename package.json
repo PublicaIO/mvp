@@ -44,6 +44,7 @@
     "moment": "^2.20.1",
     "numeral": "^2.0.6",
     "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
     "passport-goodreads": "^1.0.0",
     "passport-linkedin-oauth2": "^1.5.0",
     "vue": "^2.5.13",
