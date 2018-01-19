@@ -1,5 +1,8 @@
-node_modules
+node_modules/
 public/
-!public/images
+!public/images/
 npm-debug.log
 .env
+build/
+truffle.js
+truffle-config.js

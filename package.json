@@ -8,7 +8,8 @@
   "scripts": {
     "build": "webpack --config config/webpack.config.js",
     "watch": "webpack --config config/webpack.config.js --watch",
-    "dev": "node src/server"
+    "dev": "node src/server",
+    "compile": "rm -rf build/contracts && truffle compile"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -43,6 +44,7 @@
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.16.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "web3": "1.0.0-beta.26"
   }
 }
