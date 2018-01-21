@@ -102,8 +102,8 @@ export default {
         return {
             registerStep: false,
             user_login: {
-                email: 'thisis@example.com',
-                password: 'example'
+                email: null,
+                password: null
             },
             user_register: {
                 firstname: null,
