@@ -142,6 +142,12 @@ export default {
         }
     },
 
+    watch: {
+        registerStep() {
+            this.error = false;
+        }
+    },
+
     components: {
         pblUiFormField
     }
