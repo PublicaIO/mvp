@@ -9,7 +9,7 @@
 
                 <div class="input-block">
                     <div class="input-field">
-                        <input :id="id" :type="type" @keyup="returnValue" @change="returnValue" v-model="value" :disabled="disabled">
+                        <input :id="id" :type="type" @keyup="returnValue" @change="returnValue" v-model="value" :disabled="disabled" required>
                     </div>
 
                     <div class="input-symbol" v-if="symbol !== null">
@@ -29,7 +29,7 @@
                 </label>
 
                 <template v-if="type !== 'textarea'">
-                    <input :id="id" :type="type" v-model="value" @keyup="returnValue" :disabled="disabled">
+                    <input :id="id" :type="type" v-model="value" @keyup="returnValue" :disabled="disabled" required>
                 </template>
 
                 <template v-else>

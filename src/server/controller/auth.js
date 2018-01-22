@@ -61,23 +61,17 @@ const register = (req, res) => {
         return res.error('DATA_VALIDATION', 'Validation errors');
     }
 
-    emailExistence.check(user.email, (err, emailExist) => {
-        if (emailExist) {
-            firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-            .then((resp) => {
-                createProfile({
-                    email: user.email,
-                    firstname: user.firstname,
-                    lastname: user.lastname
-                })
-                .then(() => res.success())
-                .catch((error) => res.error(error.code, error.message));
-            })
-            .catch((error) => res.error(error.code, error.message));
-        } else {
-            res.error('EMAIL_DONT_EXIST', 'This e-mail does not exist');
-        }
-    });
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+    .then((resp) => {
+        createProfile({
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname
+        })
+        .then(() => res.success())
+        .catch((error) => res.error(error.code, error.message));
+    })
+    .catch((error) => res.error(error.code, error.message));
 }
 
 const createProfile = (userData) => {

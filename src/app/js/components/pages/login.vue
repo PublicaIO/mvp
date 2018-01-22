@@ -55,7 +55,7 @@
             </section>
 
             <section class="section-register" v-if="registerStep">
-                <form @submit.prevent="register">
+                <form @submit.prevent="register" ref="regform">
                     <p>
                         <pbl-ui-form-field :init-value="user_register.firstname" id="reg_firstname" title="Name" type="input" @changed="user_register.firstname = arguments[0]">
                         </pbl-ui-form-field>
@@ -67,7 +67,7 @@
                     </p>
 
                     <p>
-                        <pbl-ui-form-field :init-value="user_register.email" id="reg_email" title="E-mail" type="input" @changed="user_register.email = arguments[0]">
+                        <pbl-ui-form-field :init-value="user_register.email" id="reg_email" title="E-mail" type="email" @changed="user_register.email = arguments[0]">
                         </pbl-ui-form-field>
                     </p>
 
@@ -131,7 +131,6 @@ export default {
 
             firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
                 .then((user) => {
-                    console.log(user);
                     this.$store.commit('setUser', user.providerData[0])
                     this.$router.push('/')
                 })
@@ -142,13 +141,16 @@ export default {
         },
 
         register() {
-            axios.post('/user/register', { user_register: this.user_register }).then((resp) => {
-                this.error = false;
-                this.login(true);
-            }).catch((error) => {
-                console.error(error.response.data);
-                this.error = error.response.data.message;
-            });
+            const isValid = this.$refs.regform.checkValidity();
+            if (isValid) {
+                axios.post('/user/register', { user_register: this.user_register }).then((resp) => {
+                    this.error = false;
+                    this.login(true);
+                }).catch((error) => {
+                    console.error(error.response.data);
+                    this.error = error.response.data.message;
+                });
+            }
         }
     },
 
