@@ -53,11 +53,11 @@ export default {
     methods: {
         logout() {
             firebase.auth().signOut()
-            .then(() => {
-                this.$store.commit('setUser', null);
-                this.$router.push('/user/login');
-            })
-            .catch(errorHandler);
+                .then(() => {
+                    this.$store.commit('setUser', null);
+                    this.$router.push('/user/login');
+                })
+                .catch(errorHandler);
         }
     }
 }

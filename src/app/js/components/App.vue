@@ -11,7 +11,7 @@ export default {
     },
 
     created() {
-        const token = this.$route.query.token;
+        const { token } = this.$route.query;
 
         if (token) {
             firebase.auth().signInWithCustomToken(token)
