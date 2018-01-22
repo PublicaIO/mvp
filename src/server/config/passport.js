@@ -9,7 +9,20 @@ const passport = {
         clientID: process.env.LINKEDIN_CLIENT_ID,
         clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
         callbackURL: process.env.LINKEDIN_CALLBACK,
-        scope: ['r_emailaddress', 'r_basicprofile'],
+        profileFields: [
+            'id',
+            'first-name',
+            'last-name',
+            'email-address',
+            'headline',
+            'summary',
+            'industry',
+            'picture-url',
+            'positions',
+            'public-profile-url',
+            'location'
+        ],
+        scope: ['r_basicprofile', 'r_emailaddress'],
         state: true,
         passReqToCallback: false
     },
