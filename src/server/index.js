@@ -11,7 +11,8 @@ const firebaseAdmin = require('firebase-admin');
 const firebaseConfig = require('./config/firebase');
 const firebaseAdminAccount = require(path.join(__dirname, '..', '..', 'config', 'firebase-admin.json'));
 
-firebase.initializeApp(firebaseConfig); 
+firebase.initializeApp(firebaseConfig);
+
 firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(firebaseAdminAccount),
     databaseURL: 'https://test-113fe.firebaseio.com'
@@ -29,6 +30,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(responseMiddleware);
+
 app.use(cookieParser('thisismysecret'));
 app.use(session({
     secret: 'thisismysecret',
@@ -36,6 +38,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 

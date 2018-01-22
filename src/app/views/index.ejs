@@ -8,8 +8,8 @@
 </head>
 <body>
     <div id="app">
-        <div is="app" :is-social="<%= data.isSocial %>" :user="<%= JSON.stringify(data.user) %>" inline-template>
-            <div class="wrap user">
+        <div is="app" inline-template>
+            <div class="wrap" :class="[currentUser ? 'user' : 'login']">
                 <navigation></navigation>
 
                 <div class="content">
@@ -19,7 +19,6 @@
         </div>
     </div>
 
-    <script src="//connect.facebook.net/en_US/sdk.js"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>

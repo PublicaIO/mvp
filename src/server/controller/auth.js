@@ -6,14 +6,23 @@ const userSchema = require('../schema/user');
 const database = firebase.database();
 
 const isAuthenticated = (req, res, next) => {
-    const user = firebase.auth().currentUser;
+    const token = req.body.token;
+    firebaseAdmin.auth().verifyIdToken(token)
+    .then((decodedToken) => {
+        if (decodedToken.uid !== null) {
+            next();
+        } else {
+            res.redirect('/user/login');
+        }
+    })
+    .catch(res.error);
+}
 
-    if (user !== null) {
-        req.user = user;
-        next();
-    } else {
-        res.redirect('/user/login');
-    }
+const verifyToken = (req, res) => {
+    const token = req.body.token;
+    firebaseAdmin.auth().verifyIdToken(token)
+    .then((decodedToken) => res.success(decodedToken))
+    .catch(res.error);
 }
 
 const loginPage = (req, res) => res.render('login');
@@ -79,5 +88,6 @@ module.exports = {
     loginPage,
     loginRequest,
     logout,
-    register
+    register,
+    verifyToken
 }

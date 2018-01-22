@@ -11,7 +11,7 @@ const passport = {
         callbackURL: process.env.LINKEDIN_CALLBACK,
         scope: ['r_emailaddress', 'r_basicprofile'],
         state: true,
-        passReqToCallback: true
+        passReqToCallback: false
     },
 
     facebook: {

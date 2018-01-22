@@ -7,8 +7,7 @@ module.exports = {
     devtool: 'eval',
     context: path.join(rootPath, 'app'),
     entry: {
-        app: path.join(rootPath, 'app', 'js', 'index.js'),
-        login: path.join(rootPath, 'app', 'js', 'login.js')
+        app: path.join(rootPath, 'app', 'js', 'index.js')
     },
 
     output: {

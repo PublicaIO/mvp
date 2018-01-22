@@ -5,10 +5,10 @@
                 <img src="/images/publica.svg" class="logotype">
             </div>
 
-            <!--
-            <nav class="header-section header-nav">
+            <nav class="header-section header-nav" v-if="currentUser">
                 <div class="wrapper">
                     <ul>
+                        <!--
                         <li>
                             <router-link to="/user/dashboard" class="button button-active-action">Dashboard</router-link>
                         </li>
@@ -20,6 +20,7 @@
                         <li>
                             <router-link to="/user/profile" class="button button-active-action">Profile</router-link>
                         </li>
+                        -->
 
                         <li>
                             <a href="#!" class="button button-passive-action" @click.prevent="logout">Logout</a>
@@ -29,6 +30,7 @@
                 </div>
             </nav>
 
+            <!--
             <div class="header-section header-user">
                 User
             </div>
@@ -38,23 +40,24 @@
 </template>
 
 <script>
-import axios from 'axios';
+import firebase from 'firebase';
 import errorHandler from 'utils/errorHandler';
 
 export default {
     computed: {
-        isSocial() {
-            return this.$store.state.isSocial;
+        currentUser() {
+            return this.$store.state.user;
         }
     },
 
     methods: {
         logout() {
-            axios.get('/user/logout')
-                .then((resp) => {
-                    window.location.href = '/';
-                })
-                .catch(errorHandler);
+            firebase.auth().signOut()
+            .then(() => {
+                this.$store.commit('setUser', null);
+                this.$router.push('/user/login');
+            })
+            .catch(errorHandler);
         }
     }
 }

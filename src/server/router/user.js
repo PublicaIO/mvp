@@ -13,6 +13,7 @@ module.exports = (() => {
     router.get('/logout', auth.logout);
     router.use('/auth', authRouter);
     router.post('/save-email', user.saveEmail);
+    router.post('/verify-token', auth.verifyToken);
 
     return router;
 })();

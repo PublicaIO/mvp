@@ -95,7 +95,9 @@
 
 <script>
 import axios from 'axios';
+import firebase from 'firebase';
 import pblUiFormField from 'components/ui/formField';
+import errorHandler from 'utils/errorHandler';
 
 export default {
     data() {
@@ -123,12 +125,12 @@ export default {
                 password: fromRegistration ? this.user_register.password : this.user_login.password
             }
 
-            axios.post('/user/login', loginData).then((resp) => {
-                this.error = false;
-                window.location.href = '/';
-            }).catch((error) => {
-                this.error = error.response.data.message;
-            });
+            firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
+            .then((user) => {
+                this.$store.commit('setUser', user.providerData[0])
+                this.$router.push('/')
+            })
+            .catch(errorHandler);
         },
 
         register() {

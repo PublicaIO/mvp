@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 const auth = require('../controller/auth');
 const firebase = require('firebase');
@@ -39,35 +38,31 @@ const updateProfile = (profile, done) => {
 
 const socialLogin = (profile, done) => {
     firebaseAdmin.auth().createCustomToken(profile.id)
-    .then((customToken) => {
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        .then(() => {
-            firebase.auth().signInWithCustomToken(customToken)
-            .then((resp) => updateProfile(profile, done))
-            .catch((error) => done(error, null));
-        });
-    })
+    .then((customToken) => done(null, customToken))
     .catch((error) => done(error, null));
 }
 
 passport.use(new GoodreadsStrategy(passportConfig.goodreads, socialCallback));
-passport.use(new LinkedInStrategy(passportConfig.linkedin, socialCallback2));
+passport.use(new LinkedInStrategy(passportConfig.linkedin, socialCallback));
 passport.use(new FacebookStrategy(passportConfig.facebook, socialCallback))
 
 module.exports = (() => {
     const router = express.Router();
 
     router.get('/facebook', passport.authenticate('facebook'), () => {});
-    router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/user/login' }), (req, res) => res.redirect('/'));
+    router.get('/facebook/callback', passport.authenticate('facebook'), (req, res) => {
+        res.redirect(`/#/?token=${req.user}`);
+    });
 
     router.get('/linkedin', passport.authenticate('linkedin'), () => {});
-    router.get('/linkedin/callback', passport.authenticate('linkedin', {
-        successRedirect: '/',
-        failureRedirect: '/user/login'
-    }));
+    router.get('/linkedin/callback', passport.authenticate('linkedin') , (req, res) => {
+        res.redirect(`/#/?token=${req.user}`);
+    });
 
     router.get('/goodreads', passport.authenticate('goodreads'), () => {});
-    router.get('/goodreads/callback', passport.authenticate('goodreads', { failureRedirect: '/user/login' }), (req, res) => res.redirect('/'));
+    router.get('/goodreads/callback', passport.authenticate('goodreads'), (req, res) => {
+        res.redirect(`/#/?token=${req.user}`);
+    });
 
     return router;
 })();
