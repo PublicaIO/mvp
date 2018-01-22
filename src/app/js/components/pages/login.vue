@@ -37,50 +37,54 @@
             </section>
 
             <section class="section-login" v-if="!registerStep">
-                <p>
-                    <pbl-ui-form-field :init-value="user_login.email" id="login_email" title="E-mail" type="input" @changed="user_login.email = arguments[0]">
-                    </pbl-ui-form-field>
-                </p>
+                <form @submit.prevent="login()">
+                    <p>
+                        <pbl-ui-form-field :init-value="user_login.email" id="login_email" title="E-mail" type="input" @changed="user_login.email = arguments[0]">
+                        </pbl-ui-form-field>
+                    </p>
 
-                <p>
-                    <pbl-ui-form-field :init-value="user_login.password" id="login_password" title="Password" type="password" @changed="user_login.password = arguments[0]">
-                    </pbl-ui-form-field>
-                </p>
+                    <p>
+                        <pbl-ui-form-field :init-value="user_login.password" id="login_password" title="Password" type="password" @changed="user_login.password = arguments[0]">
+                        </pbl-ui-form-field>
+                    </p>
 
-                <p>
-                    <button class="button button-large button-success" @click="login()">Login</button>
-                </p>
+                    <p>
+                        <button class="button button-large button-success" @click="login()">Login</button>
+                    </p>
+                </form>
             </section>
 
             <section class="section-register" v-if="registerStep">
-                <p>
-                    <pbl-ui-form-field :init-value="user_register.firstname" id="reg_firstname" title="Name" type="input" @changed="user_register.firstname = arguments[0]">
-                    </pbl-ui-form-field>
-                </p>
+                <form @submit.prevent="register">
+                    <p>
+                        <pbl-ui-form-field :init-value="user_register.firstname" id="reg_firstname" title="Name" type="input" @changed="user_register.firstname = arguments[0]">
+                        </pbl-ui-form-field>
+                    </p>
 
-                <p>
-                    <pbl-ui-form-field :init-value="user_register.lastname" id="reg_lastname" title="Surname" type="input" @changed="user_register.lastname = arguments[0]">
-                    </pbl-ui-form-field>
-                </p>
+                    <p>
+                        <pbl-ui-form-field :init-value="user_register.lastname" id="reg_lastname" title="Surname" type="input" @changed="user_register.lastname = arguments[0]">
+                        </pbl-ui-form-field>
+                    </p>
 
-                <p>
-                    <pbl-ui-form-field :init-value="user_register.email" id="reg_email" title="E-mail" type="input" @changed="user_register.email = arguments[0]">
-                    </pbl-ui-form-field>
-                </p>
+                    <p>
+                        <pbl-ui-form-field :init-value="user_register.email" id="reg_email" title="E-mail" type="input" @changed="user_register.email = arguments[0]">
+                        </pbl-ui-form-field>
+                    </p>
 
-                <p>
-                    <pbl-ui-form-field :init-value="user_register.password" id="reg_password" title="Password" type="password" @changed="user_register.password = arguments[0]">
-                    </pbl-ui-form-field>
-                </p>
+                    <p>
+                        <pbl-ui-form-field :init-value="user_register.password" id="reg_password" title="Password" type="password" @changed="user_register.password = arguments[0]">
+                        </pbl-ui-form-field>
+                    </p>
 
-                <p>
-                    <pbl-ui-form-field :init-value="user_register.confirm_password" id="reg_confirm_password" title="Repeat Password" type="password" @changed="user_register.confirm_password = arguments[0]">
-                    </pbl-ui-form-field>
-                </p>
+                    <p>
+                        <pbl-ui-form-field :init-value="user_register.confirm_password" id="reg_confirm_password" title="Repeat Password" type="password" @changed="user_register.confirm_password = arguments[0]">
+                        </pbl-ui-form-field>
+                    </p>
 
-                <p>
-                    <button class="button button-large button-active-action" @click="register">Register</button>
-                </p>
+                    <p>
+                        <button class="button button-large button-active-action" @click="register">Register</button>
+                    </p>
+                </form>
             </section>
 
             <section class="login-actions">
@@ -138,7 +142,7 @@ export default {
                 this.error = false;
                 this.login(true);
             }).catch((error) => {
-                console.error(error.response);
+                console.error(error.response.data);
                 this.error = error.response.data.message;
             });
         }

@@ -1,5 +1,7 @@
 node_modules
 public/js
+!public/favicon.ico
 npm-debug.log
 .env
 config/firebase-admin.json
+.DS_Store

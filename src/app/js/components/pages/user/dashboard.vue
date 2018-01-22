@@ -3,7 +3,7 @@
         <div class="page-heading border">
             <div class="page-heading-content wrapper">
                 <h2 class="page-title center">
-                    Author Dashboard
+                    Author's Dashboard
                 </h2>
             </div>
         </div>
@@ -27,7 +27,7 @@
             </template>
 
             <template v-else>
-                Welcome! Here you will soon see guidance videos on how to use the Publica platform. Stay tuned for updates!
+                Welcome! Thank you for registration! Here you will soon see guidance videos on how to use the Publica platform. Stay tuned for updates!
             </template>
         </div>
     </div>

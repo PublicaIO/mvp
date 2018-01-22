@@ -6,6 +6,7 @@ const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
 const firebase = require('firebase');
 const firebaseAdmin = require('firebase-admin');
 const firebaseConfig = require('./config/firebase');
@@ -26,6 +27,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '..', 'app', 'views'));
 app.set('trust proxy', 1);
 
+app.use(favicon(path.join(__dirname, '..', '..', 'public', 'favicon.ico')));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
