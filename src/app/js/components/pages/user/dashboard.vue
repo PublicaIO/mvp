@@ -27,7 +27,7 @@
             </template>
 
             <template v-else>
-                Author Dashboard will be ready anytime soon, we will keep you up to date!
+                Welcome! Here you will soon see guidance videos on how to use the Publica platform. Stay tuned for updates!
             </template>
         </div>
     </div>
