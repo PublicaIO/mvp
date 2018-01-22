@@ -24,9 +24,13 @@ const loginRequest = (req, res) => {
         password: req.body.password
     }
 
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-    .then((resp) => res.success(resp.providerData))
-    .catch((error) => res.error(error.code, error.message));
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .then(() => {
+        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+        .then((resp) => res.success(resp.providerData))
+        .catch((error) => res.error(error.code, error.message));
+    })
+    .catch(console.log);
 };
 
 const logout = (req, res) => {

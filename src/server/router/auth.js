@@ -39,12 +39,15 @@ const updateProfile = (profile, done) => {
 
 const socialLogin = (profile, done) => {
     firebaseAdmin.auth().createCustomToken(profile.id)
-        .then((customToken) => {
+    .then((customToken) => {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
             firebase.auth().signInWithCustomToken(customToken)
             .then((resp) => updateProfile(profile, done))
             .catch((error) => done(error, null));
-        })
-        .catch((error) => done(error, null));
+        });
+    })
+    .catch((error) => done(error, null));
 }
 
 passport.use(new GoodreadsStrategy(passportConfig.goodreads, socialCallback));

@@ -10,11 +10,13 @@ const firebase = require('firebase');
 const firebaseAdmin = require('firebase-admin');
 const firebaseConfig = require('./config/firebase');
 const firebaseAdminAccount = require(path.join(__dirname, '..', '..', 'config', 'firebase-admin.json'));
+
 firebase.initializeApp(firebaseConfig); 
 firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(firebaseAdminAccount),
     databaseURL: 'https://test-113fe.firebaseio.com'
 });
+
 const router = require('./router');
 const responseMiddleware = require('./utils/response');
 const app = express();
