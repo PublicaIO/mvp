@@ -8,9 +8,9 @@
             </div>
         </div>
 
-        <div class="dashboard-content mini-wrapper" v-if="currentUser">
+        <div class="dashboard-content" v-if="currentUser">
             <template v-if="!currentUser.email">
-                <form @submit.prevent="save" ref="emailform">
+                <form @submit.prevent="save" ref="emailform" class="mini-wrapper">
                     <p>
                         It seems like we are missing your e-mail, please share it with us!
                     </p>
@@ -29,7 +29,13 @@
             </template>
 
             <template v-else>
-                Welcome! Thank you for registration! Here you will soon see guidance videos on how to use the Publica platform. Stay tuned for updates!
+                <div class="wrapper">
+                    <p>
+                        Welcome! Thank you for registration! Here you will soon see guidance videos on how to use the Publica platform. Stay tuned for updates!
+                    </p>
+
+                    <iframe src="https://www.youtube.com/embed/zSUY_8MEikA" class="dashboard-video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
             </template>
         </div>
     </div>
