@@ -135,8 +135,7 @@ export default {
                     this.$router.push('/')
                 })
                 .catch((error) => {
-                    console.error(error.response.data);
-                    this.error = error.response.data.message;
+                    this.error = error.message;
                 });
         },
 
@@ -147,8 +146,7 @@ export default {
                     this.error = false;
                     this.login(true);
                 }).catch((error) => {
-                    console.error(error.response.data);
-                    this.error = error.response.data.message;
+                    this.error = error.message;
                 });
             }
         }

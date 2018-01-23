@@ -10,20 +10,22 @@
 
         <div class="dashboard-content mini-wrapper" v-if="currentUser">
             <template v-if="!currentUser.email">
-                <p>
-                    It seems like we are missing your e-mail, please share it with us!
-                </p>
+                <form @submit.prevent="save" ref="emailform">
+                    <p>
+                        It seems like we are missing your e-mail, please share it with us!
+                    </p>
 
-                <p v-if="error">
-                    {{ error }}
-                </p>
+                    <p v-if="error">
+                        {{ error }}
+                    </p>
 
-                <pbl-ui-form-field :init-value="email" id="user_email" title="E-mail" type="input" @changed="email = arguments[0]">
-                </pbl-ui-form-field>
+                    <pbl-ui-form-field :init-value="email" id="user_email" title="E-mail" type="input" @changed="email = arguments[0]">
+                    </pbl-ui-form-field>
 
-                <p>
-                    <button class="button button-large button-success" @click="save()">Save</button>
-                </p>
+                    <p>
+                        <button class="button button-large button-success" type="submit">Save</button>
+                    </p>
+                </form>
             </template>
 
             <template v-else>
@@ -55,13 +57,17 @@ export default {
 
     methods: {
         save() {
-            const user = firebase.auth().currentUser;
+            const isValid = this.$refs.emailform.checkValidity();
 
-            user.updateEmail(this.email)
-                .then(() => this.$store.commit('setUserEmail', this.email))
-                .catch((error) => {
-                    this.error = error.response.data.message;
-                });
+            if (isValid) {
+                const user = firebase.auth().currentUser;
+
+                user.updateEmail(this.email)
+                    .then(() => this.$store.commit('setUserEmail', this.email))
+                    .catch((error) => {
+                        this.error = error.message;
+                    });
+            }
         }
     },
 
