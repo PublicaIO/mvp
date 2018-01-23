@@ -37,7 +37,7 @@
             </section>
 
             <section class="section-login" v-if="!registerStep">
-                <form @submit.prevent="login()">
+                <form @submit.prevent="login()" ref="signinform">
                     <p>
                         <pbl-ui-form-field :init-value="user_login.email" id="login_email" title="E-mail" type="input" @changed="user_login.email = arguments[0]">
                         </pbl-ui-form-field>
@@ -124,22 +124,26 @@ export default {
 
     methods: {
         login(fromRegistration = false) {
-            this.$store.commit('setLoading', true);
-            const loginData = {
-                email: fromRegistration ? this.user_register.email : this.user_login.email,
-                password: fromRegistration ? this.user_register.password : this.user_login.password
-            }
+            const isValid = this.$refs.signinform.checkValidity();
 
-            firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
-                .then((user) => {
-                    this.$store.commit('setUser', user.providerData[0]);
-                    this.$router.push('/');
-                    this.$store.commit('setLoading', false);
-                })
-                .catch((error) => {
-                    this.error = error.message;
-                    this.$store.commit('setLoading', false);
-                });
+            if (isValid) {
+                this.$store.commit('setLoading', true);
+                const loginData = {
+                    email: fromRegistration ? this.user_register.email : this.user_login.email,
+                    password: fromRegistration ? this.user_register.password : this.user_login.password
+                }
+
+                firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
+                    .then((user) => {
+                        this.$store.commit('setUser', user.providerData[0]);
+                        this.$router.push('/');
+                        this.$store.commit('setLoading', false);
+                    })
+                    .catch((error) => {
+                        this.error = error.message;
+                        this.$store.commit('setLoading', false);
+                    });
+            }
         },
 
         register() {
