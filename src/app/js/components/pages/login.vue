@@ -124,7 +124,7 @@ export default {
 
     methods: {
         login(fromRegistration = false) {
-            const isValid = this.$refs.signinform.checkValidity();
+            const isValid = typeof this.$refs.signinform !== 'undefined' ? this.$refs.signinform.checkValidity() : true;
 
             if (isValid) {
                 this.$store.commit('setLoading', true);
@@ -148,8 +148,10 @@ export default {
 
         register() {
             const isValid = this.$refs.regform.checkValidity();
+
             if (isValid) {
                 this.$store.commit('setLoading', true);
+
                 axios.post('/user/register', { user_register: this.user_register }).then((resp) => {
                     this.error = false;
                     this.login(true);
