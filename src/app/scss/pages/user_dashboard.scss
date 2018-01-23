@@ -10,7 +10,8 @@
         .dashboard-video {
             display: block;
             margin: 15px auto 0 auto;
-            width: 560px;
+            width: 100%;
+            max-width: 560px;
             height: 315px;
         }
     }
