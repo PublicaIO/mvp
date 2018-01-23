@@ -1,5 +1,6 @@
 <script>
 import Navigation from 'components/ui/navigation';
+import Preloader from 'components/ui/preloader';
 import errorHandler from 'utils/errorHandler';
 import firebase from 'firebase';
 
@@ -21,25 +22,29 @@ export default {
                         email: user.email
                     }
                     this.$store.commit('setUser', userData);
+                    this.$store.commit('setLoading', false);
                 })
                 .catch(errorHandler);
         } else {
             firebase.auth().onAuthStateChanged((user) => {
                 if (!user) {
                     this.$router.push('/user/login');
+                    this.$store.commit('setLoading', false);
                 } else {
                     const userData = {
                         displayName: user.displayName,
                         email: user.email
                     }
                     this.$store.commit('setUser', user.providerData.length ? user.providerData[0] : userData);
+                    this.$store.commit('setLoading', false);
                 }
             });
         }
     },
 
     components: {
-        Navigation
+        Navigation,
+        Preloader
     }
 }
 </script>

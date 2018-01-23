@@ -124,6 +124,7 @@ export default {
 
     methods: {
         login(fromRegistration = false) {
+            this.$store.commit('setLoading', true);
             const loginData = {
                 email: fromRegistration ? this.user_register.email : this.user_login.email,
                 password: fromRegistration ? this.user_register.password : this.user_login.password
@@ -131,22 +132,26 @@ export default {
 
             firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
                 .then((user) => {
-                    this.$store.commit('setUser', user.providerData[0])
-                    this.$router.push('/')
+                    this.$store.commit('setUser', user.providerData[0]);
+                    this.$router.push('/');
+                    this.$store.commit('setLoading', false);
                 })
                 .catch((error) => {
                     this.error = error.message;
+                    this.$store.commit('setLoading', false);
                 });
         },
 
         register() {
             const isValid = this.$refs.regform.checkValidity();
             if (isValid) {
+                this.$store.commit('setLoading', true);
                 axios.post('/user/register', { user_register: this.user_register }).then((resp) => {
                     this.error = false;
                     this.login(true);
                 }).catch((error) => {
                     this.error = error.message;
+                    this.$store.commit('setLoading', false);
                 });
             }
         }

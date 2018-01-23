@@ -1,7 +1,8 @@
 export default {
     state: {
         user: null,
-        isSocial: false
+        isSocial: false,
+        isLoading: true
     },
 
     mutations: {
@@ -15,6 +16,10 @@ export default {
 
         setUserEmail(state, email) {
             state.user.email = email;
+        },
+
+        setLoading(state, isLoading) {
+            state.isLoading = isLoading;
         }
     }
 };
