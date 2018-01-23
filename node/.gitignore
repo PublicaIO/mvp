@@ -1,6 +1,5 @@
 node_modules/
-public/
-!public/images/
+public/js
 npm-debug.log
 .env
 build/
