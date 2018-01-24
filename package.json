@@ -44,6 +44,7 @@
     "loadash": "^1.0.0",
     "moment": "^2.20.1",
     "numeral": "^2.0.6",
+    "publica-contracts": "^1.0.0",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.16.0",
