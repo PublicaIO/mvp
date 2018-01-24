@@ -34,7 +34,7 @@
                         Welcome! Thank you for registration! Here you will soon see guidance videos on how to use the Publica platform. Stay tuned for updates!
                     </p>
 
-                    <iframe src="https://www.youtube.com/embed/zSUY_8MEikA" class="dashboard-video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/zSUY_8MEikA?rel=0&amp;showinfo=0" class="dashboard-video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             </template>
         </div>
