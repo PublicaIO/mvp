@@ -49,6 +49,7 @@
     "passport-goodreads": "^1.0.0",
     "passport-linkedin-oauth2": "^1.5.0",
     "serve-favicon": "^2.4.5",
+    "velocity-animate": "^1.5.1",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.16.0",
