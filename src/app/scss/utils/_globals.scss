@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
 * {
     box-sizing: border-box;
@@ -7,11 +7,15 @@
 html body {
     margin: 0;
     padding: 0;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
+}
+
+a {
+    text-decoration: none;
 }
 
 .page-heading {

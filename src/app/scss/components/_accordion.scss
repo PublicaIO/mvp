@@ -1,67 +1,94 @@
 ul.accordion {
     width: 100%;
-    padding: 20px 0;
+    padding: 0;
+    margin: 0 0 20px 0;
 
     li {
+        background: #feecec;
         width: inherit;
-        border-top: 1px dotted #dce7eb;
         list-style-type: none;
         position: relative;
-        padding: 10px 15px;
+        padding: 10px 20px;
+        margin: 7px 0;
         cursor: pointer;
 
         &.expanded {
             i {
                 &:before {
-                    transform: translate(2px , 0) rotate(45deg)
+                    transform: translate(3px , 0) rotate(45deg)
                 }
 
                 &:after {
-                    transform: translate(-2px, 0) rotate(-45deg)
+                    transform: translate(-3px, 0) rotate(-45deg)
                 }
             }
         }
 
         > p {
-            text-transform: uppercase;
-            color: #83898b;
+            color: black;
+            font-size: 14px;
+            line-height: 25px;
+            margin: 0;
         }
 
         .item-content {
             opacity: 0;
-
-            .actions {
-                font-size: 13px;
-                padding: 10px 0;
-
-                a {
-                    color: #4673f0;
-                    display: block;
-                }
-            }
+            // margin-top: 15px;
         }
 
         i {
             position: absolute;
-            transform: translate(-6px, 0);
             margin-top: 16px;
-            right: 0;
+            right: 28px;
+            top: 3px;
+            opacity: 0.5;
 
             &:before , &:after {
                 content: '';
                 transition: all 0.3s;
                 position: absolute;
-                background-color: #05bfe8;
-                width: 3px;
-                height: 9px;
+                background-color: #949b9c;
+                width: 2px;
+                height: 10px;
             }
 
             &:before {
-                transform: translate(-2px, 0) rotate(45deg);
+                transform: translate(-3px, 0) rotate(45deg);
             }
 
             &:after {
-                transform: translate(2px , 0) rotate(-45deg);
+                transform: translate(3px , 0) rotate(-45deg);
+            }
+        }
+    }
+
+    &.podcasts {
+        $active-bg: #d2ebfa;
+        $default-bg: #f2f2f2;
+        $title-color: #1e314f;
+
+        li {
+            border-radius: 2px;
+            background: $default-bg;
+
+            .podcast-title {
+                font-weight: 400;
+
+                span {
+                    font-weight: 300;
+                }
+            }
+
+            > p {
+                color: $title-color;
+            }
+
+            &.expanded {
+                background: $active-bg;
+            }
+
+            &:hover, &.expaded {
+                background: $active-bg;
             }
         }
     }

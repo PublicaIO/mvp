@@ -1,0 +1,101 @@
+.audio-player-wrapper {
+    padding: 15px 0 10px;
+
+    $player-theme-color: #1d9de6;
+    $player-scrollbar-bg: #afcae1;
+
+    audio {
+        display: none;
+    }
+
+    .actions {
+        margin-top: 15px;
+        display: flex;
+        font-size: 14px;
+
+        * {
+            margin-right: 20px;
+            font-weight: 300;
+        }
+
+        a {
+            color: $player-theme-color;
+
+            &:hover {
+                text-decoration: underline;
+                font-weight: 400;
+            }
+        }
+
+        .playback-button {
+            width: 14px;
+            height: 16px;
+            position: relative;
+
+            &:before, &:after {
+                content: '';
+                display: block;
+            }
+
+            &:before {
+                width: 0;
+                height: 0;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 10px solid $player-theme-color;
+            }
+
+            &.playing {
+                &:before, &:after {
+                    background: $player-theme-color;
+                    position: absolute;
+                    top: 0;
+                }
+
+                &:before {
+                    border: none;
+                    width: 5px;
+                    height: 15px;
+                    left: 0;
+                }
+
+                &:after {
+                    width: 5px;
+                    height: 15px;
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    .progress-bar {
+        height: 20px;
+        position: relative;
+
+        .bar, .position {
+            width: 100%;
+            height: 4px;
+            border-radius: 3px;
+            background: $player-scrollbar-bg;
+            position: absolute;
+            top: 8px;
+            left: 0;
+        }
+
+        .position {
+            width: 0%;
+            background: $player-theme-color;
+
+            span {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                position: absolute;
+                right: 0;
+                top: -8px;
+                background: $player-theme-color;
+            }
+        }
+    }
+
+}

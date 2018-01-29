@@ -1,6 +1,18 @@
 #page-dashboard {
+    h2 {
+        font-size: 21px;
+        line-height: 25px;
+        letter-spacing: 0;
+        margin: 0 0 35px 0;
+    }
+
     .dashboard-content {
-        padding: 0 50px;
+        padding-top: 40px;
+
+        .wrapper {
+            padding: 0 50px;
+            box-sizing: content-box;
+        }
 
         button {
             display: block;
@@ -19,5 +31,89 @@
     .books-list {
         max-width: 1024px;
         margin: 0 auto;
+    }
+
+    .podcasts-wrapper {
+        margin-bottom: 71px;
+    }
+
+    .question-form-wrapper {
+        background: #f2f2f2;
+        padding: 40px 0;
+
+        textarea {
+            width: 100%;
+            height: 130px;
+            resize: none;
+            padding: 15px;
+            font-size: 14px;
+            font-family: 'Roboto', 'sans-serif';
+            color: #1e314f;
+            border-radius: 3px;
+            margin-bottom: 12px;
+        }
+
+        .radio-buttons {
+            margin-bottom: 8px;
+
+            input {
+                display: none;
+                color: #1e314f;
+
+                &:checked ~ label {
+                    &:before {
+                        border: 1px solid #1d9de6;
+                    }
+
+                    &:after {
+                        background: #1d9de6;
+                    }
+                }
+            }
+
+            label {
+                font-size: 14px;
+                padding-left: 25px;
+                position: relative;
+                display: block;
+                padding: 5px 0 5px 35px;
+                cursor: pointer;
+
+                &:before, &:after {
+                    content: '';
+                    border-radius: 50%;
+                    background: white;
+                    position: absolute;
+                }
+
+                &:before {
+                    width: 20px;
+                    height: 20px;
+                    border: 1px solid #d7d7d7;
+                    top: 3px;
+                    left: 0;
+                }
+
+                &:after {
+                    width: 12px;
+                    height: 12px;
+                    left: 5px;
+                    top: 8px;
+                }
+            }
+        }
+
+        button {
+            background: #1d9de6;
+            color: #fff;
+            width: auto;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2.4px;
+            font-weight: 400;
+            padding: 13px 30px;
+            border-radius: 3px;
+            margin-top: 20px;
+        }
     }
 }
