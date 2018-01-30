@@ -9,11 +9,6 @@
     .dashboard-content {
         padding-top: 40px;
 
-        .wrapper {
-            padding: 0 50px;
-            box-sizing: content-box;
-        }
-
         button {
             display: block;
             width: 100%;
@@ -51,6 +46,8 @@
             color: #1e314f;
             border-radius: 3px;
             margin-bottom: 12px;
+            background: #fff;
+            border: 1px solid #d7d7d7;
         }
 
         .radio-buttons {
@@ -106,7 +103,8 @@
         button {
             background: #1d9de6;
             color: #fff;
-            width: auto;
+            width: 100%;
+            text-align: center;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 2.4px;
@@ -114,6 +112,10 @@
             padding: 13px 30px;
             border-radius: 3px;
             margin-top: 20px;
+
+            @include breakpoint(phablet) {
+                width: auto;
+            }
         }
     }
 }

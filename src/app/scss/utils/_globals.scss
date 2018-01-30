@@ -18,6 +18,10 @@ a {
     text-decoration: none;
 }
 
+#app {
+    min-width: 320px;
+}
+
 .page-heading {
     margin: 0 0 40px 0;
     padding: 10px;
@@ -76,9 +80,14 @@ a {
 .wrapper {
     max-width: 1024px;
     margin: 0 auto;
+    padding: 0 20px;
+
+    @include breakpoint(phablet) {
+        padding: 0 50px;
+    }
 }
 
 .mini-wrapper {
+    @extend .wrapper;
     max-width: 500px;
-    margin: 0 auto;
 }

@@ -3,6 +3,7 @@
 
     $player-theme-color: #1d9de6;
     $player-scrollbar-bg: #afcae1;
+    $seeker-radius: 20px;
 
     audio {
         display: none;
@@ -11,11 +12,17 @@
     .actions {
         margin-top: 15px;
         display: flex;
+        flex-wrap: wrap;
         font-size: 14px;
 
         * {
-            margin-right: 20px;
+            padding-right: 20px;
             font-weight: 300;
+            width: 50%;
+
+            @include breakpoint(phablet) {
+                width: auto;
+            }
         }
 
         a {
@@ -31,6 +38,12 @@
             width: 14px;
             height: 16px;
             position: relative;
+            margin-bottom: 15px;
+            padding-right: 34px;
+
+            @include breakpoint(phablet) {
+                margin-bottom: 0;
+            }
 
             &:before, &:after {
                 content: '';
@@ -62,15 +75,17 @@
                 &:after {
                     width: 5px;
                     height: 15px;
-                    right: 0;
+                    left: 9px;
                 }
             }
         }
     }
 
     .progress-bar {
-        height: 20px;
+        height: $seeker-radius;
         position: relative;
+        width: calc(100% - #{$seeker-radius});
+        margin: 0 auto;
 
         .bar, .position {
             width: 100%;
@@ -85,16 +100,33 @@
         .position {
             width: 0%;
             background: $player-theme-color;
+            transition: all 0.1s;
+        }
 
-            span {
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                position: absolute;
-                right: 0;
-                top: -8px;
-                background: $player-theme-color;
-            }
+        .seeker {
+            width: $seeker-radius;
+            height: $seeker-radius;
+            border-radius: 50%;
+            position: absolute;
+            background: $player-theme-color;
+            transition: all 0.1s;
+        }
+    }
+
+    .transcript {
+        color: #1e314f;
+        font-weight: 300;
+        font-size: 14px;
+        margin-top: 15px;
+
+        p {
+            margin: 0;
+        }
+
+        .semi-title {
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-weight: 400;
         }
     }
 

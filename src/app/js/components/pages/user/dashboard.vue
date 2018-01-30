@@ -27,9 +27,9 @@
                         <p v-if="error">{{ error }}</p>
 
                         <ul class="accordion podcasts">
-                            <li v-for="(podcast, index) in podcasts" @click="podcast.expanded = !podcast.expanded" :key="index" :class="podcast.expanded ? 'expanded' : '' ">
+                            <li v-for="(podcast, index) in podcasts" :key="index" :class="podcast.expanded ? 'expanded' : '' ">
                                 <i></i>
-                                <p class="podcast-title"><span>Episode {{ podcast.episode }}:</span> {{ podcast.title }}</p>
+                                <p @click="podcast.expanded = !podcast.expanded" class="podcast-title"><span>Episode {{ podcast.episode }}:</span> {{ podcast.title }}</p>
 
                                 <transition name="expand" v-on:enter="togglePodcastEnter" v-on:leave="togglePodcastLeave">
                                     <div class="item-content" v-show="podcast.expanded" ref="podcast">
@@ -44,6 +44,7 @@
                 <div class="question-form-wrapper">
                     <div class="wrapper">
                         <h2>Submit a question</h2>
+                        <p v-show="questionSubmitStatus">{{ questionSubmitStatus }}</p>
 
                         <textarea id="question" v-model="question.text" placeholder="Hello, I have a question..."/>
 
@@ -83,6 +84,7 @@ export default {
                 text: '',
                 type: 'private'
             },
+            questionSubmitStatus: false,
         }
     },
 
@@ -108,7 +110,16 @@ export default {
         },
 
         submitQuestion() {
-            console.log('submit question');
+            if (!this.question.text || !this.question.type) {
+                this.questionSubmitStatus = 'Please fill required data';
+                return;
+            }
+
+            firebase.database().ref().child('faq').push(
+                Object.assign(this.question, { email: this.currentUser.email })
+            )
+            .then(() => this.questionSubmitStatus = 'Question was posted')
+            .catch((error) => this.questionSubmitStatus = 'Unable to post question')
         },
 
         fetchPodcasts() {
@@ -132,15 +143,12 @@ export default {
         togglePodcastEnter(element, done) {
             Velocity(element, 'stop');
 
-            const height = element.getAttribute('data-height') + 'px';
-            const opacity = 1;
-            const translateY = ['50%', '0'];
-
             element.style.height = 0;
 
-            Velocity(element, { height, opacity, translateY }, {
+            Velocity(element, { height: `${element.getAttribute('data-height')}px`, opacity: 1 }, {
                 duration: 300,
                 complete: () => {
+                    element.style.height = '';
                     element.setAttribute('data-shown', '1');
                     done();
                 }
@@ -150,22 +158,21 @@ export default {
         togglePodcastLeave(element, done) {
             Velocity(element, 'stop');
 
-            const height = 0;
-            const translateY = ['0', '50%'];
-            const opacity = 0;
-
-            Velocity(element, { height, translateY, opacity }, {
+            Velocity(element, { height: 0, opacity: 0 }, {
                 duration: 300,
                 complete: () => {
                     element.style.height = '';
                     element.setAttribute('data-shown', '0');
+                    this.resizeEvent([element]);
                     done();
                 }
             });
         },
 
-        resizeEvent() {
-            this.$refs.podcast.forEach((podcastRef) => {
+        resizeEvent(elements = []) {
+            elements = elements.length ? elements : this.$refs.podcast;
+
+            elements.forEach((podcastRef) => {
                 const isVisible = parseInt(podcastRef.getAttribute('data-shown'));
 
                 if (!isVisible) {

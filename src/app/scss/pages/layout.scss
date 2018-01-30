@@ -3,9 +3,13 @@
     flex-direction: column;
 
     .wrap {
+        width: 100%;
+
         &.login {
-            width: 400px;
-            margin: 0 auto;
+            @include breakpoint(phablet) {
+                width: 400px;
+                margin: 0 auto;
+            }
 
             .logotype {
                 display: block;
