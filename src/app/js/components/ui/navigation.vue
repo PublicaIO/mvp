@@ -6,35 +6,13 @@
             </div>
 
             <nav class="header-section header-nav" v-if="currentUser">
-                <div class="wrapper">
-                    <ul>
-                        <!--
-                        <li>
-                            <router-link to="/user/dashboard" class="button button-active-action">Dashboard</router-link>
-                        </li>
-
-                        <li>
-                            <router-link to="/book/create" class="button button-success">Create Book</router-link>
-                        </li>
-
-                        <li>
-                            <router-link to="/user/profile" class="button button-active-action">Profile</router-link>
-                        </li>
-                        -->
-
-                        <li>
-                            <a href="#!" class="button button-passive-action" @click.prevent="logout">Logout</a>
-                        </li>
-
-                    </ul>
-                </div>
+                <ul>
+                    <li><router-link to="/user/dashboard">Dashboard</router-link></li>
+                    <li><router-link to="/user/dashboard">Submit question</router-link></li>
+                    <li><router-link to="/user/faq">FAQ</router-link></li>
+                    <li><a href="#!" @click.prevent="logout">Logout</a></li>
+                </ul>
             </nav>
-
-            <!--
-            <div class="header-section header-user">
-                User
-            </div>
-            -->
         </div>
     </header>
 </template>

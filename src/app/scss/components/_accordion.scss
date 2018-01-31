@@ -8,7 +8,6 @@ ul.accordion {
         width: inherit;
         list-style-type: none;
         position: relative;
-        padding: 10px 20px;
         margin: 7px 0;
         cursor: pointer;
         overflow: hidden;
@@ -30,7 +29,7 @@ ul.accordion {
             font-size: 14px;
             line-height: 25px;
             margin: 0;
-            padding-right: 20px;
+            padding: 10px 40px 10px 20px;
         }
 
         .item-content {

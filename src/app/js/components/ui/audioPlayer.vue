@@ -17,14 +17,17 @@
         </div>
 
         <div class="actions">
-            <a @click.prevent="playToggle" href="#!" :class="{ playing: isPlaying, 'playback-button': true} "></a>
-
-            <div class="ticker">
-                {{this.timeFromSeconds(this.position)}}/{{this.timeFromSeconds(this.duration)}}
+            <div class="group1">
+                <a @click.prevent="playToggle" href="#!" :class="{ playing: isPlaying, 'playback-button': true} "></a>
+                <div class="ticker">
+                    {{this.timeFromSeconds(this.position)}}/{{this.timeFromSeconds(this.duration)}}
+                </div>
             </div>
 
-            <a @click.prevent="showTranscript" href="#!">Show transcript</a>
-            <a href="#!">Download MP3</a>
+            <div class="group2">
+                <a @click.prevent="showTranscript" href="#!">Show transcript</a>
+                <a href="#!">Download MP3</a>
+            </div>
         </div>
 
         <div class="transcript" v-show="transcriptVisible">

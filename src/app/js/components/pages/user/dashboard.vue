@@ -7,9 +7,7 @@
                         It seems like we are missing your e-mail, please share it with us!
                     </p>
 
-                    <p v-if="error">
-                        {{ error }}
-                    </p>
+                    <p v-if="error">{{ error }}</p>
 
                     <pbl-ui-form-field :init-value="email" id="user_email" title="E-mail" type="input" @changed="email = arguments[0]">
                     </pbl-ui-form-field>
@@ -43,22 +41,24 @@
 
                 <div class="question-form-wrapper">
                     <div class="wrapper">
-                        <h2>Submit a question</h2>
-                        <p v-show="questionSubmitStatus">{{ questionSubmitStatus }}</p>
+                        <div class="question-form-content">
+                            <h2>Submit a question</h2>
+                            <p v-show="questionSubmitStatus">{{ questionSubmitStatus }}</p>
 
-                        <textarea id="question" v-model="question.text" placeholder="Hello, I have a question..."/>
+                            <textarea id="question" v-model="faqItem.question" placeholder="Hello, I have a question..."/>
 
-                        <div class="radio-buttons">
-                            <input type="radio" v-model="question.type" value="private" id="private-question" />
-                            <label for="private-question">I want this question to be answered privately, and the answer sent to my email</label>
+                            <div class="radio-buttons">
+                                <input type="radio" v-model="faqItem.type" value="private" id="private-question" />
+                                <label for="private-question">I want this question to be answered privately, and the answer sent to my email</label>
+                            </div>
+
+                            <div class="radio-buttons">
+                                <input type="radio" v-model="faqItem.type" value="public" id="public-question" />
+                                <label for="public-question">I want this question to be public and the answer listed on the FAQ</label>
+                            </div>
+
+                            <button class="button" @click.prevent="submitQuestion">Submit</button>
                         </div>
-
-                        <div class="radio-buttons">
-                            <input type="radio" v-model="question.type" value="public" id="public-question" />
-                            <label for="public-question">I want this question to be public and the answer listed on the FAQ</label>
-                        </div>
-
-                        <button class="button" @click.prevent="submitQuestion">Submit</button>
                     </div>
                 </div>
             </template>
@@ -80,8 +80,9 @@ export default {
             error: false,
             email: null,
             podcasts: [],
-            question: {
-                text: '',
+            faqItem: {
+                question: 'Pellentesque lacinia aliquam eros. Quisque sagittis tortor vitae odio tristique porttitor?',
+                answer: 'Aenean laoreet ante non ipsum suscipit, a dictum lacus vehicula. Etiam dolor massa, vehicula tempus lorem et, finibus tempor purus',
                 type: 'private'
             },
             questionSubmitStatus: false,
@@ -110,13 +111,13 @@ export default {
         },
 
         submitQuestion() {
-            if (!this.question.text || !this.question.type) {
+            if (!this.faqItem.question || !this.faqItem.type) {
                 this.questionSubmitStatus = 'Please fill required data';
                 return;
             }
 
             firebase.database().ref().child('faq').push(
-                Object.assign(this.question, { email: this.currentUser.email })
+                Object.assign(this.faqItem, { email: this.currentUser.email })
             )
             .then(() => this.questionSubmitStatus = 'Question was posted')
             .catch((error) => this.questionSubmitStatus = 'Unable to post question')

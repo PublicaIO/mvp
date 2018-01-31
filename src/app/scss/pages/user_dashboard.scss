@@ -29,12 +29,18 @@
     }
 
     .podcasts-wrapper {
-        margin-bottom: 71px;
+        max-width: 670px;
+        margin: 0 auto 71px;
     }
 
     .question-form-wrapper {
         background: #f2f2f2;
         padding: 40px 0;
+
+        .question-form-content {
+            max-width: 670px;
+            margin: 0 auto;
+        }
 
         textarea {
             width: 100%;

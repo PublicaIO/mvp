@@ -1,10 +1,11 @@
 <template>
-    <div id="page-faq">
-        <ul>
-            <li v-for="(item, index) in faq" :key="index">
-                <p>{{ item.text }}</p>
-            </li>
-        </ul>
+    <div id="page-faq" class="wrapper">
+        <h2 class="faq-page-title">FAQ</h2>
+
+        <div class="faq-item" v-for="(item, index) in faq" :key="index">
+            <div class="question">{{ item.question }}</div>
+            <div class="answer">{{ item.answer }}</div>
+        </div>
     </div>
 </template>
 

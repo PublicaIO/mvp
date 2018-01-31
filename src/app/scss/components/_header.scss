@@ -1,17 +1,25 @@
 .main-header {
-    border-bottom: 2px solid $border-color;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 
     .main-header-content {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        padding-top: 7px;
+        padding-bottom: 15px;
 
         .header-section {
             flex: 1 1 auto;
         }
 
+        .header-logotype img {
+            max-width: 110px;
+        }
+
         nav {
+            max-width: 400px;
+
             ul {
                 display: flex;
                 flex-direction: row;
@@ -23,6 +31,19 @@
 
                 li {
                     flex: 1 1 auto;
+
+                    a {
+                        text-transform: uppercase;
+                        font-weight: 300;
+                        font-size: 12px;
+                        color: #2e2e2e;
+                        letter-spacing: 1.2px;
+
+                        &.active, &:hover {
+                            font-weight: 400;
+                            color: #1d9de6;
+                        }
+                    }
                 }
             }
         }

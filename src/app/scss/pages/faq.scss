@@ -1,0 +1,28 @@
+#page-faq {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    max-width: 700px;
+
+    .faq-page-title {
+        font-size: 30px;
+        margin-top: 0;
+    }
+
+    .faq-item {
+        padding: 20px 0;
+        border-top: 1px solid #dedede;
+
+        .question {
+            font-weight: 400;
+            font-size: 20px;
+            margin-bottom: 7px;
+            color: #1e314f;
+        }
+
+        .answer {
+            font-weight: 300;
+            font-size: 16px;
+            color :#a7a7a7;
+        }
+    }
+}
