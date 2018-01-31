@@ -6,14 +6,23 @@
             </div>
 
             <nav class="header-section header-nav" v-if="currentUser" :class="{ opened: isOpened }">
-                <i id="menu-trigger" @click.prevent="isOpened = !isOpened"></i>
+                <div id="menu-trigger" @click.prevent="isOpened = !isOpened" :class="{ transformed: isOpened }">
+                    <i>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </i>
+                </div>
 
-                <ul id="main-menu">
-                    <li><router-link to="/user/dashboard">Dashboard</router-link></li>
-                    <li><router-link to="/user/dashboard">Submit question</router-link></li>
-                    <li><router-link to="/user/faq">FAQ</router-link></li>
-                    <li><a href="#!" @click.prevent="logout">Logout</a></li>
-                </ul>
+                <transition name="fade">
+                    <ul id="main-menu" v-show="isOpened">
+                        <li><router-link to="/user/dashboard">Dashboard</router-link></li>
+                        <li><router-link to="/user/dashboard#submit-q">Submit question</router-link></li>
+                        <li><router-link to="/user/faq">FAQ</router-link></li>
+                        <li><a href="#!" @click.prevent="logout">Logout</a></li>
+                    </ul>
+                </transition>
             </nav>
         </div>
     </header>
@@ -22,6 +31,7 @@
 <script>
 import firebase from 'firebase';
 import errorHandler from 'utils/errorHandler';
+import Velocity from 'velocity-animate';
 
 export default {
     data() {
@@ -44,6 +54,12 @@ export default {
                     this.$router.push('/user/login');
                 })
                 .catch(errorHandler);
+        }
+    },
+
+    watch:{
+        $route (to, from){
+            this.isOpened = false;
         }
     }
 }

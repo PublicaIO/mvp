@@ -1,6 +1,6 @@
 <template>
     <div class="audio-player-wrapper">
-        <audio ref="player" controls controlsList="nodownload">
+        <audio ref="player" controls controlsList="nodownload" >
             <source :src="entity.url">
             Your browser does not support the audio element.
         </audio>

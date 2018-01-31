@@ -2,7 +2,7 @@
     <div id="page-faq" class="wrapper">
         <h2 class="faq-page-title">FAQ</h2>
 
-        <div class="faq-item" v-for="(item, index) in faq" :key="index">
+        <div class="faq-item" v-for="(item, index) in faqs" :key="index">
             <div class="question">{{ item.question }}</div>
             <div class="answer">{{ item.answer }}</div>
         </div>
@@ -11,14 +11,15 @@
 
 <script>
 
+import axios from 'axios';
 import errorHandler from 'utils/errorHandler';
-import firebase from 'firebase';
 
 export default {
     data() {
         return {
             error: false,
-            faq: false
+            faqs: false,
+            isLoading: false
         }
     },
 
@@ -30,15 +31,17 @@ export default {
 
     methods: {
         fetchFAQ() {
-            firebase.database().ref('/faq').once('value')
-            .then((faq) => {
-                faq = faq.val();
-                this.faq = faq;
+            this.isLoading = true;
+
+            axios.get('/faq/get')
+            .then((response) => {
+                this.faqs = response.data.faqs;
+                this.isLoading = false;
             })
             .catch((error) => {
-                this.error = 'Unable to fetch items';
-                console.error(error);
-            });
+                this.isLoading = false;
+                errorHandler(error);
+            })
         }
 
     },

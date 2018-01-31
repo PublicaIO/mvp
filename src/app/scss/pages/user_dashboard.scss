@@ -30,7 +30,11 @@
 
     .podcasts-wrapper {
         max-width: 670px;
-        margin: 0 auto 71px;
+        margin: 0 auto 40px;
+
+        @include breakpoint(phablet) {
+            margin-bottom: 71px;
+        }
     }
 
     .question-form-wrapper {
@@ -40,6 +44,18 @@
         .question-form-content {
             max-width: 670px;
             margin: 0 auto;
+        }
+
+        .question-submit-status {
+            font-size: 14px;
+
+            &.error {
+                color: #ff0000;
+            }
+
+            &.success {
+                color: #1b7e1b;
+            }
         }
 
         textarea {

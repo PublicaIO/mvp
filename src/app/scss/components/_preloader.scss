@@ -20,3 +20,9 @@
         }
     }
 }
+
+.local-preloader {
+    @extend .preloader;
+    position: relative;
+    max-height: 100px;
+}

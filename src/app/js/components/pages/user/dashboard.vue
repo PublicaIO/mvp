@@ -24,7 +24,7 @@
                         <h2>Listen to Publica guidance podcast by our CEO, Josef Marc</h2>
                         <p v-if="error">{{ error }}</p>
 
-                        <ul class="accordion podcasts">
+                        <ul v-show="Object.keys(podcasts).length" class="accordion podcasts">
                             <li v-for="(podcast, index) in podcasts" :key="index" :class="podcast.expanded ? 'expanded' : '' ">
                                 <i></i>
                                 <p @click="podcast.expanded = !podcast.expanded" class="podcast-title"><span>Episode {{ podcast.episode }}:</span> {{ podcast.title }}</p>
@@ -36,6 +36,12 @@
                                 </transition>
                             </li>
                         </ul>
+
+                        <div v-show="this.isLoading" class="local-preloader">
+                            <div class="preloader-wrapper">
+                                <img src="/images/preloader.svg" alt="Loading...">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -43,7 +49,9 @@
                     <div class="wrapper">
                         <div class="question-form-content">
                             <h2>Submit a question</h2>
-                            <p v-show="questionSubmitStatus">{{ questionSubmitStatus }}</p>
+                            <p :class="questionSubmitStatusClass" v-show="questionSubmitStatus.message">
+                                {{ questionSubmitStatus.message }}
+                            </p>
 
                             <textarea id="question" v-model="faqItem.question" placeholder="Hello, I have a question..."/>
 
@@ -85,13 +93,25 @@ export default {
                 answer: 'Aenean laoreet ante non ipsum suscipit, a dictum lacus vehicula. Etiam dolor massa, vehicula tempus lorem et, finibus tempor purus',
                 type: 'private'
             },
-            questionSubmitStatus: false,
+            questionSubmitStatus: {
+                type: false,
+                message: false
+            },
+            isLoading: false,
         }
     },
 
     computed: {
         currentUser() {
             return this.$store.state.user;
+        },
+
+        questionSubmitStatusClass() {
+            return {
+                error: this.questionSubmitStatus.type == 'error',
+                success: this.questionSubmitStatus.type == 'success',
+                'question-submit-status': true
+            }
         }
     },
 
@@ -112,18 +132,33 @@ export default {
 
         submitQuestion() {
             if (!this.faqItem.question || !this.faqItem.type) {
-                this.questionSubmitStatus = 'Please fill required data';
+                this.questionSubmitStatus = {
+                    type: 'error',
+                    message: 'Please fill required data.',
+                }
                 return;
             }
 
-            firebase.database().ref().child('faq').push(
-                Object.assign(this.faqItem, { email: this.currentUser.email })
-            )
-            .then(() => this.questionSubmitStatus = 'Question was posted')
-            .catch((error) => this.questionSubmitStatus = 'Unable to post question')
+            axios.post('/faq/save', Object.assign(this.faqItem, { email: this.currentUser.email, token: this.currentUser.token }))
+            .then((response) => {
+                this.questionSubmitStatus = {
+                    type: 'success',
+                    message: 'Thanks! Question was submitted.',
+                }
+            })
+            .catch((error) => {
+                this.questionSubmitStatus = {
+                    type: 'error',
+                    message: 'Unable to submit question at this moment.',
+                }
+
+                errorHandler(error);
+            });
         },
 
         fetchPodcasts() {
+            this.isLoading = true;
+
             firebase.database().ref('/podcasts').once('value')
             .then((podcasts) => {
                 podcasts = podcasts.val();
@@ -134,8 +169,10 @@ export default {
 
                 this.podcasts = podcasts;
                 this.$nextTick(this.resizeEvent);
+                this.isLoading = false;
             })
             .catch((error) => {
+                this.isLoading = false;
                 this.error = 'Unable to fetch podcasts';
                 console.error(error);
             });

@@ -11,9 +11,15 @@
                 margin: 0 auto;
             }
 
+            .main-header {
+                box-shadow: none;
+                border-bottom: 2px solid #e0e6ef;
+            }
+
             .logotype {
                 display: block;
-                max-width: 300px;
+                max-width: 235px;
+                padding: 11px 20px 23px 0;
                 margin: 0 auto;
             }
         }

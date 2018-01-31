@@ -104,7 +104,6 @@
         .position {
             width: 0%;
             background: $player-theme-color;
-            transition: all 0.1s;
         }
 
         .seeker {
@@ -113,7 +112,6 @@
             border-radius: 50%;
             position: absolute;
             background: $player-theme-color;
-            transition: all 0.1s;
         }
     }
 

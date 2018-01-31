@@ -16,24 +16,27 @@ export default {
 
         if (token) {
             firebase.auth().signInWithCustomToken(token)
-                .then((user) => {
+                .then(async (user) => {
                     const userData = {
                         displayName: user.displayName,
-                        email: user.email
+                        email: user.email,
+                        token: await user.getToken()
                     }
                     this.$store.commit('setUser', userData);
                     this.$store.commit('setLoading', false);
+                    this.$router.push('/');
                 })
                 .catch(errorHandler);
         } else {
-            firebase.auth().onAuthStateChanged((user) => {
+            firebase.auth().onAuthStateChanged(async (user) => {
                 if (!user) {
                     this.$router.push('/user/login');
                     this.$store.commit('setLoading', false);
                 } else {
                     const userData = {
                         displayName: user.displayName,
-                        email: user.email
+                        email: user.email,
+                        token: await user.getToken()
                     }
                     this.$store.commit('setUser', user.providerData.length ? user.providerData[0] : userData);
                     this.$store.commit('setLoading', false);
