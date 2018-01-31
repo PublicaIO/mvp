@@ -26,7 +26,7 @@
 
             <div class="group2">
                 <a @click.prevent="showTranscript" href="#!">Show transcript</a>
-                <a href="#!">Download MP3</a>
+                <a :href="entity.url" download="podcast.mp3">Download MP3</a>
             </div>
         </div>
 

@@ -2,7 +2,9 @@
     <header class="main-header">
         <div class="main-header-content wrapper">
             <div class="header-section header-logotype">
-                <img src="/images/publica.svg" class="logotype">
+                <router-link to="/user/dashboard">
+                    <img src="/images/publica.svg" class="logotype">
+                </router-link>
             </div>
 
             <nav class="header-section header-nav" v-if="currentUser" :class="{ opened: isOpened }">
@@ -17,9 +19,9 @@
 
                 <transition name="fade">
                     <ul id="main-menu" v-show="isOpened">
-                        <li><router-link to="/user/dashboard">Dashboard</router-link></li>
-                        <li><router-link to="/user/dashboard#submit-q">Submit question</router-link></li>
-                        <li><router-link to="/user/faq">FAQ</router-link></li>
+                        <li><router-link active-class="active" to="/user/dashboard">Dashboard</router-link></li>
+                        <li><router-link active-class="active" to="/user/submit-question">Submit question</router-link></li>
+                        <li><router-link active-class="active" to="/user/faq">FAQ</router-link></li>
                         <li><a href="#!" @click.prevent="logout">Logout</a></li>
                     </ul>
                 </transition>
@@ -57,8 +59,8 @@ export default {
         }
     },
 
-    watch:{
-        $route (to, from){
+    watch: {
+        $route (to, from) {
             this.isOpened = false;
         }
     }

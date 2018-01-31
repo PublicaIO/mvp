@@ -3,9 +3,7 @@
         <div class="dashboard-content" v-if="currentUser">
             <template v-if="!currentUser.email">
                 <form @submit.prevent="save" ref="emailform" class="mini-wrapper">
-                    <p>
-                        It seems like we are missing your e-mail, please share it with us!
-                    </p>
+                    <p>It seems like we are missing your e-mail, please share it with us!</p>
 
                     <p v-if="error">{{ error }}</p>
 
@@ -75,6 +73,7 @@
 </template>
 
 <script>
+
 import axios from 'axios';
 import pblUiFormField from 'components/ui/formField';
 import pblAudioPlayer from 'components/ui/audioPlayer';
@@ -87,10 +86,9 @@ export default {
         return {
             error: false,
             email: null,
-            podcasts: [],
+            podcasts: {},
             faqItem: {
-                question: 'Pellentesque lacinia aliquam eros. Quisque sagittis tortor vitae odio tristique porttitor?',
-                answer: 'Aenean laoreet ante non ipsum suscipit, a dictum lacus vehicula. Etiam dolor massa, vehicula tempus lorem et, finibus tempor purus',
+                question: '',
                 type: 'private'
             },
             questionSubmitStatus: {
@@ -108,8 +106,8 @@ export default {
 
         questionSubmitStatusClass() {
             return {
-                error: this.questionSubmitStatus.type == 'error',
-                success: this.questionSubmitStatus.type == 'success',
+                error: this.questionSubmitStatus.type === 'error',
+                success: this.questionSubmitStatus.type === 'success',
                 'question-submit-status': true
             }
         }
@@ -136,46 +134,48 @@ export default {
                     type: 'error',
                     message: 'Please fill required data.',
                 }
+
                 return;
             }
 
             axios.post('/faq/save', Object.assign(this.faqItem, { email: this.currentUser.email, token: this.currentUser.token }))
-            .then((response) => {
-                this.questionSubmitStatus = {
-                    type: 'success',
-                    message: 'Thanks! Question was submitted.',
-                }
-            })
-            .catch((error) => {
-                this.questionSubmitStatus = {
-                    type: 'error',
-                    message: 'Unable to submit question at this moment.',
-                }
+                .then((response) => {
+                    this.questionSubmitStatus = {
+                        type: 'success',
+                        message: 'Thanks! Question was submitted.',
+                    }
+                    this.faqItem.question = '';
+                })
+                .catch((error) => {
+                    this.questionSubmitStatus = {
+                        type: 'error',
+                        message: 'Unable to submit question at this moment.',
+                    }
 
-                errorHandler(error);
-            });
+                    errorHandler(error);
+                });
         },
 
         fetchPodcasts() {
             this.isLoading = true;
 
             firebase.database().ref('/podcasts').once('value')
-            .then((podcasts) => {
-                podcasts = podcasts.val();
+                .then((podcasts) => {
+                    podcasts = podcasts.val();
 
-                for (let podcast in podcasts) {
-                    podcasts[podcast].expanded = false;
-                }
+                    for (const podcast in podcasts) {
+                        podcasts[podcast].expanded = false;
+                    }
 
-                this.podcasts = podcasts;
-                this.$nextTick(this.resizeEvent);
-                this.isLoading = false;
-            })
-            .catch((error) => {
-                this.isLoading = false;
-                this.error = 'Unable to fetch podcasts';
-                console.error(error);
-            });
+                    this.podcasts = podcasts;
+                    this.$nextTick(this.resizeEvent);
+                    this.isLoading = false;
+                })
+                .catch((error) => {
+                    this.isLoading = false;
+                    this.error = 'Unable to fetch podcasts';
+                    console.error(error);
+                });
         },
 
         togglePodcastEnter(element, done) {
@@ -234,8 +234,17 @@ export default {
         pblAudioPlayer
     },
 
+    watch: {
+        currentUser: {
+            deep: true,
+            handler: function (val, oldValue) {
+                if (val) this.fetchPodcasts();
+            }
+        }
+    },
+
     created() {
-        this.fetchPodcasts();
+        if (this.currentUser) this.fetchPodcasts();
 
         window.addEventListener('resize', () => {
             clearTimeout(this.resizeTimer);

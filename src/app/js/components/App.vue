@@ -23,8 +23,8 @@ export default {
                         token: await user.getToken()
                     }
                     this.$store.commit('setUser', userData);
+                    this.$router.push('/user/dashboard');
                     this.$store.commit('setLoading', false);
-                    this.$router.push('/');
                 })
                 .catch(errorHandler);
         } else {
@@ -38,7 +38,7 @@ export default {
                         email: user.email,
                         token: await user.getToken()
                     }
-                    this.$store.commit('setUser', user.providerData.length ? user.providerData[0] : userData);
+                    this.$store.commit('setUser', userData);
                     this.$store.commit('setLoading', false);
                 }
             });

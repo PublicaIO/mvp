@@ -136,9 +136,15 @@ export default {
                 }
 
                 firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
-                    .then((user) => {
-                        this.$store.commit('setUser', user.providerData[0]);
-                        this.$router.push('/');
+                    .then(async (user) => {
+                        const userData = {
+                            displayName: user.displayName,
+                            email: user.email,
+                            token: await user.getToken()
+                        }
+
+                        this.$store.commit('setUser', userData);
+                        this.$router.push('/user/dashboard');
                         this.$store.commit('setLoading', false);
                     })
                     .catch((error) => {

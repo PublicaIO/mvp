@@ -45,7 +45,6 @@
     "jsonschema": "^1.2.2",
     "loadash": "^1.0.0",
     "moment": "^2.20.1",
-    "node-ses": "^2.1.0",
     "numeral": "^2.0.6",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",

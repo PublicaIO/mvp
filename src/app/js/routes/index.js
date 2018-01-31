@@ -12,6 +12,10 @@ export default [
         alias: '/'
     },
     {
+        path: '/user/submit-question',
+        component: UserDashboard
+    },
+    {
         path: '/user/faq',
         component: UserFAQ
     },

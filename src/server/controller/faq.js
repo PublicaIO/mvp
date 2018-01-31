@@ -14,7 +14,7 @@ const sendEmail = (faq, callback) => {
 
     const emailContent = `
         <p>New ${faq.type} question has been asked by ${faq.email}:</p>
-        <p>${faq.question}</p>
+        <p style="font-style: italic">"${faq.question}"</p>
     `;
 
     const data = {
@@ -34,37 +34,41 @@ const save = (req, res) => {
     const faq = {
         email: req.body.email,
         question: req.body.question,
-        type: req.body.type
+        type: req.body.type,
+        answer: '',
+        published: false
     }
 
     firebaseAdminApp.database().ref().child('faq').push(faq)
     .then(() => {
         sendEmail(faq, (error, message) => {
             if (error) {
-                res.error('EMAIL_SEND', error.message);
-            } else {
-                res.success();
+                console.error('EMAIL_SEND', error.message);
             }
         });
+
+        // Send success response disregarding of email status.
+        res.success();
     })
     .catch((error) => res.error(error.code, error.message));
 }
 
 const get = (req, res) => {
-    let ref = firebaseAdminApp.database().ref('/faq');
+    firebaseAdminApp.database().ref('/faq')
+        .orderByChild('type')
+        .equalTo('public')
+        .once('value')
+    .then((snapshot) => {
+        const faqs = {};
+        snapshot = snapshot.val();
 
-    ref = ref.orderByChild('type').equalTo('public');
-    ref = ref.orderByChild('answer').equalTo(true);
-
-    ref.once('value')
-    .then((faqs) => {
-        for (let key in faqs) {
-            // if (faq.answer) {
-
-            // }
+        for (let key in snapshot) {
+            if (snapshot[key].published) {
+                faqs[key] = snapshot[key];
+            }
         }
 
-        res.success({ faqs: faqs.val() })
+        res.success({ faqs })
     })
     .catch((error) => res.error(error.code, error.message))
 }
