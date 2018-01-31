@@ -5,8 +5,10 @@
                 <img src="/images/publica.svg" class="logotype">
             </div>
 
-            <nav class="header-section header-nav" v-if="currentUser">
-                <ul>
+            <nav class="header-section header-nav" v-if="currentUser" :class="{ opened: isOpened }">
+                <i id="menu-trigger" @click.prevent="isOpened = !isOpened"></i>
+
+                <ul id="main-menu">
                     <li><router-link to="/user/dashboard">Dashboard</router-link></li>
                     <li><router-link to="/user/dashboard">Submit question</router-link></li>
                     <li><router-link to="/user/faq">FAQ</router-link></li>
@@ -22,6 +24,12 @@ import firebase from 'firebase';
 import errorHandler from 'utils/errorHandler';
 
 export default {
+    data() {
+        return {
+            isOpened: false,
+        }
+    },
+
     computed: {
         currentUser() {
             return this.$store.state.user;
