@@ -3,6 +3,19 @@
 
 * {
     box-sizing: border-box;
+    tap-highlight-color: none;
+}
+
+pre {
+    width: 100%;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Roboto';
+    line-height: 22px;
+    text-align: justify;
 }
 
 html body {

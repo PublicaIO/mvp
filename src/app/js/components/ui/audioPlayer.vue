@@ -32,7 +32,7 @@
 
         <div class="transcript" v-show="transcriptVisible">
             <p class="semi-title">Transcript:</p>
-            <p>{{ entity.transcript }}</p>
+            <pre>{{ entity.transcript }}</pre>
         </div>
     </div>
 </template>

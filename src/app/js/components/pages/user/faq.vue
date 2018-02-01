@@ -5,7 +5,7 @@
         <div v-show="Object.keys(faqs).length">
             <div class="faq-item" v-for="(item, index) in faqs" :key="index">
                 <div class="question">{{ item.question }}</div>
-                <div class="answer">{{ item.answer }}</div>
+                <pre class="answer">{{ item.answer }}</pre>
             </div>
         </div>
 
