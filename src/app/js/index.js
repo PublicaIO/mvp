@@ -9,16 +9,8 @@ import App from 'components/App';
 import filters from 'filters';
 import errorHandler from 'utils/errorHandler';
 
-const config = {
-    apiKey: 'AIzaSyDMVH7YklsngH7XcIuJK7Ssw1t8-2_zcUU',
-    authDomain: 'test-113fe.firebaseapp.com',
-    databaseURL: 'https://test-113fe.firebaseio.com',
-    projectId: 'test-113fe',
-    storageBucket: 'test-113fe.appspot.com',
-    messagingSenderId: '333700728393'
-};
-firebase.initializeApp(config);
-
+const firebaseConfig = require('config/firebase');
+firebase.initializeApp(firebaseConfig);
 
 require('../scss/style');
 

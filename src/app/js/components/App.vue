@@ -20,7 +20,7 @@ export default {
                     const userData = {
                         displayName: user.displayName,
                         email: user.email,
-                        token: await user.getToken()
+                        token: await user.getIdToken()
                     }
                     this.$store.commit('setUser', userData);
                     this.$router.push('/user/dashboard');
@@ -36,7 +36,7 @@ export default {
                     const userData = {
                         displayName: user.displayName,
                         email: user.email,
-                        token: await user.getToken()
+                        token: await user.getIdToken()
                     }
                     this.$store.commit('setUser', userData);
                     this.$store.commit('setLoading', false);

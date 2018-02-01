@@ -1,5 +1,5 @@
-import CONFIG from 'config';
 import BN from 'bn.js';
+const CONFIG = require('config/blockchain');
 
 export default (value) => {
     const num = new BN(value);

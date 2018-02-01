@@ -9,14 +9,14 @@ const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const firebase = require('firebase');
 const firebaseAdmin = require('firebase-admin');
-const firebaseConfig = require('./config/firebase');
-const firebaseAdminAccount = require(path.join(__dirname, '..', '..', 'config', 'firebase-admin.json'));
+const firebaseConfig = require(path.join(__dirname, '..', 'config', 'firebase'));
+const firebaseAdminAccount = require(path.join(__dirname, '..', 'config', 'firebase-admin.json'));
 
 firebase.initializeApp(firebaseConfig);
 
 firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(firebaseAdminAccount),
-    databaseURL: 'https://test-113fe.firebaseio.com'
+    databaseURL: firebaseAdmin.databaseURL
 });
 
 const router = require('./router');

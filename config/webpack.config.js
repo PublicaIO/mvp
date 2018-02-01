@@ -23,8 +23,8 @@ module.exports = {
             'routes': path.join(rootPath, 'app', 'js', 'routes'),
             'store': path.join(rootPath, 'app', 'js', 'store'),
             'utils': path.join(rootPath, 'app', 'js', 'utils'),
-            'config': path.join(rootPath, 'app', 'js', 'config'),
-            'filters': path.join(rootPath, 'app', 'js', 'filters')
+            'filters': path.join(rootPath, 'app', 'js', 'filters'),
+            'config': path.join(rootPath, 'config')
         }
     },
 

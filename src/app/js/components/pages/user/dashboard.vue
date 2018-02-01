@@ -237,9 +237,9 @@ export default {
     watch: {
         currentUser: {
             deep: true,
-            handler: function (val, oldValue) {
+            handler(val, old) {
                 if (val) this.fetchPodcasts();
-            }
+            },
         }
     },
 

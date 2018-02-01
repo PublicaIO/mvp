@@ -1,9 +1,11 @@
 const path = require('path');
 const email = require('emailjs');
 const firebaseAdmin = require('firebase-admin');
-const firebaseAdminAccount = require(path.join(__dirname, '..', '..', '..', 'config', 'firebase-admin.json'));
-const firebaseConfig = require(path.join(__dirname, '..', 'config', 'firebase'));
-const smtpConfig = require(path.join(__dirname, '..', 'config', 'smtp'));
+
+const configPath = path.join(__dirname, '..', '..', 'config');
+const firebaseAdminAccount = require(path.join(configPath, 'firebase-admin.json'));
+const firebaseConfig = require(path.join(configPath, 'firebase'));
+const smtpConfig = require(path.join(configPath, 'smtp'));
 
 const firebaseAdminApp = firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(firebaseAdminAccount),

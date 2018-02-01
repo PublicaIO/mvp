@@ -3,5 +3,6 @@ public/js
 !public/favicon.ico
 npm-debug.log
 .env
-config/firebase-admin.json
+src/config/firebase-admin.json
+src/config/firebase.js
 .DS_Store

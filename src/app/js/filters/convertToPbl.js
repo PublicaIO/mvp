@@ -1,4 +1,4 @@
-import CONFIG from 'config';
+const CONFIG = require('config/blockchain');
 
 export default (value, rate = CONFIG.conversionRate) => {
     if (value && !isNaN(value)) {
