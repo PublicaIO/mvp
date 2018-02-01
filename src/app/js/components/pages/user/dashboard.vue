@@ -25,7 +25,7 @@
                         <ul v-show="Object.keys(podcasts).length" class="accordion podcasts">
                             <li v-for="(podcast, index) in podcasts" :key="index" :class="podcast.expanded ? 'expanded' : '' ">
                                 <i></i>
-                                <p @click="podcast.expanded = !podcast.expanded" class="podcast-title"><span>Episode {{ podcast.episode }}:</span> {{ podcast.title }}</p>
+                                <p @click="podcast.expanded = !podcast.expanded" class="podcast-title"><span>{{ podcast.episode }}:</span> {{ podcast.title }}</p>
 
                                 <transition name="expand" v-on:enter="togglePodcastEnter" v-on:leave="togglePodcastLeave">
                                     <div class="item-content" v-show="podcast.expanded" ref="podcast">
@@ -165,6 +165,7 @@ export default {
 
                     for (const podcast in podcasts) {
                         podcasts[podcast].expanded = false;
+                        podcasts[podcast].ID = podcast;
                     }
 
                     this.podcasts = podcasts;

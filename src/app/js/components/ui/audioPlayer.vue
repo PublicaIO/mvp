@@ -26,7 +26,7 @@
 
             <div class="group2">
                 <a @click.prevent="showTranscript" href="#!">Show transcript</a>
-                <a :href="entity.url" download="podcast.mp3">Download MP3</a>
+                <a :href="`/podcast/getMP3?id=${entity.ID}`" target="_blank">Download MP3</a>
             </div>
         </div>
 
@@ -41,6 +41,7 @@
 
 import clamp from 'utils/clamp';
 import interact from 'interactjs';
+import axios from 'axios';
 
 export default {
     props: {

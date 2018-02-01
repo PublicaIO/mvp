@@ -1,12 +1,11 @@
 const express = require('express');
-const faq = require('../controller/faq');
+const podcast = require('../controller/podcast');
 const auth = require('../controller/auth');
 
 module.exports = (() => {
     const router = express.Router();
 
-    router.post('/save', auth.isAuthenticated, faq.save);
-    router.get('/get', faq.get);
+    router.get('/getMP3', podcast.getMP3);
 
     return router;
 })();
