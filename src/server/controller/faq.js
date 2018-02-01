@@ -1,12 +1,13 @@
 const path = require('path');
+const email = require('emailjs');
 const firebaseAdmin = require('firebase-admin');
 const firebaseAdminAccount = require(path.join(__dirname, '..', '..', '..', 'config', 'firebase-admin.json'));
-const email = require('emailjs');
+const firebaseConfig = require(path.join(__dirname, '..', 'config', 'firebase'));
 const smtpConfig = require(path.join(__dirname, '..', 'config', 'smtp'));
 
 const firebaseAdminApp = firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(firebaseAdminAccount),
-    databaseURL: 'https://test-113fe.firebaseio.com'
+    databaseURL: firebaseConfig.databaseURL
 }, 'FAQ-APP');
 
 const sendEmail = (faq, callback) => {
