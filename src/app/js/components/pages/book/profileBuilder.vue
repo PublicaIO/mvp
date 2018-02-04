@@ -54,6 +54,7 @@ export default {
         return {
             sections: [],
             drag: false,
+            book: false,
 
             widgets: [
                 {
@@ -132,9 +133,9 @@ export default {
     mounted() {
         const bookID = this.$route.params.id;
 
-        axios.get(`/book/${bookID}`).then((resp) => {
-            console.log(resp.data.book);
-        }).catch(errorHandler);
+        axios.get(`/book/${bookID}`)
+            .then(resp => this.book = resp.data.book)
+            .catch(errorHandler);
     },
 
     components: {

@@ -138,7 +138,15 @@ export default {
                 return;
             }
 
-            axios.post('/faq/save', Object.assign(this.faqItem, { email: this.currentUser.email, token: this.currentUser.token }))
+            const faqData = Object.assign(
+                this.faqItem,
+                {
+                    email: this.currentUser.email,
+                    token: this.currentUser.token
+                }
+            );
+
+            axios.post('/faq/save', faqData)
                 .then((response) => {
                     this.questionSubmitStatus = {
                         type: 'success',
@@ -163,10 +171,10 @@ export default {
                 .then((podcasts) => {
                     podcasts = podcasts.val();
 
-                    for (const podcast in podcasts) {
-                        podcasts[podcast].expanded = false;
-                        podcasts[podcast].ID = podcast;
-                    }
+                    Object.keys(podcasts).forEach((key) => {
+                        podcasts[key].expanded = false;
+                        podcasts[key].ID = key;
+                    });
 
                     this.podcasts = podcasts;
                     this.$nextTick(this.resizeEvent);
@@ -210,6 +218,10 @@ export default {
 
         resizeEvent(elements = []) {
             elements = elements.length ? elements : this.$refs.podcast;
+
+            if (!elements) {
+                return;
+            }
 
             elements.forEach((podcastRef) => {
                 const isVisible = parseInt(podcastRef.getAttribute('data-shown'));

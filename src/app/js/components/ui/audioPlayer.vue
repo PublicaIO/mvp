@@ -88,8 +88,8 @@ export default {
         },
 
         timeFromSeconds(rawSeconds) {
-            const hours = (rawSeconds / 3600) >> 0;
-            const minutes = (rawSeconds / 60) >> 0;
+            const hours = Math.trunc(rawSeconds / 3600);
+            const minutes = Math.trunc(rawSeconds / 60);
             const seconds = Math.floor(rawSeconds % 60);
 
             let time = `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;

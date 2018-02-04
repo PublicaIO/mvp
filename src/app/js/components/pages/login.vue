@@ -136,7 +136,7 @@ export default {
                 }
 
                 firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
-                    .then(async (user) => {
+                    .then(async(user) => {
                         const userData = {
                             displayName: user.displayName,
                             email: user.email,

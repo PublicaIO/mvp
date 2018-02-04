@@ -16,7 +16,7 @@ export default {
 
         if (token) {
             firebase.auth().signInWithCustomToken(token)
-                .then(async (user) => {
+                .then(async(user) => {
                     const userData = {
                         displayName: user.displayName,
                         email: user.email,
@@ -28,7 +28,7 @@ export default {
                 })
                 .catch(errorHandler);
         } else {
-            firebase.auth().onAuthStateChanged(async (user) => {
+            firebase.auth().onAuthStateChanged(async(user) => {
                 if (!user) {
                     this.$router.push('/user/login');
                     this.$store.commit('setLoading', false);
