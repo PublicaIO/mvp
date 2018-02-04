@@ -136,22 +136,26 @@ export default {
                 }
 
                 firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
-                    .then(async(user) => {
-                        const userData = {
-                            displayName: user.displayName,
-                            email: user.email,
-                            token: await user.getIdToken()
-                        }
-
-                        this.$store.commit('setUser', userData);
-                        this.$router.push('/user/dashboard');
-                        this.$store.commit('setLoading', false);
-                    })
+                    .then(this.singInCallback)
                     .catch((error) => {
                         this.error = error.message;
                         this.$store.commit('setLoading', false);
                     });
             }
+        },
+
+        singInCallback(user) {
+            user.getIdToken().then((token) => {
+                const userData = {
+                    displayName: user.displayName,
+                    email: user.email,
+                    token
+                }
+
+                this.$store.commit('setUser', userData);
+                this.$router.push('/user/dashboard');
+                this.$store.commit('setLoading', false);
+            })
         },
 
         register() {

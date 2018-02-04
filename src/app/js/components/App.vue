@@ -16,31 +16,32 @@ export default {
 
         if (token) {
             firebase.auth().signInWithCustomToken(token)
-                .then(async(user) => {
-                    const userData = {
-                        displayName: user.displayName,
-                        email: user.email,
-                        token: await user.getIdToken()
-                    }
-                    this.$store.commit('setUser', userData);
-                    this.$router.push('/user/dashboard');
-                    this.$store.commit('setLoading', false);
-                })
+                .then(this.signInCallback)
                 .catch(errorHandler);
         } else {
-            firebase.auth().onAuthStateChanged(async(user) => {
+            firebase.auth().onAuthStateChanged((user) => {
                 if (!user) {
                     this.$router.push('/user/login');
                     this.$store.commit('setLoading', false);
                 } else {
-                    const userData = {
-                        displayName: user.displayName,
-                        email: user.email,
-                        token: await user.getIdToken()
-                    }
-                    this.$store.commit('setUser', userData);
-                    this.$store.commit('setLoading', false);
+                    this.signInCallback(user);
                 }
+            });
+        }
+    },
+
+    methods: {
+        signInCallback(user) {
+            user.getIdToken().then((token) => {
+                const userData = {
+                    displayName: user.displayName,
+                    email: user.email,
+                    token,
+                }
+
+                this.$store.commit('setUser', userData);
+                this.$router.push('/user/dashboard');
+                this.$store.commit('setLoading', false);
             });
         }
     },
