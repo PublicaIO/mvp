@@ -88,7 +88,7 @@
                 <section class="section-register" v-if="stepIsActive('reset')">
                     <form @submit.prevent="resetPassword()" ref="resetform">
                         <p>
-                            <pbl-ui-form-field :init-value="user_reset.email" id="reg_email" title="E-mail" type="email" @changed="user_reset.email = arguments[0]">
+                            <pbl-ui-form-field :init-value="user_reset.email" id="reset_email" title="E-mail" type="email" @changed="user_reset.email = arguments[0]">
                             </pbl-ui-form-field>
                         </p>
 
