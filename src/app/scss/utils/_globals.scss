@@ -105,3 +105,11 @@ a {
     @extend .wrapper;
     max-width: 500px;
 }
+
+.error {
+    color: #ff0000;
+},
+
+.success {
+    color: #1b7e1b;
+}

@@ -53,7 +53,7 @@ export default {
             firebase.auth().signOut()
                 .then(() => {
                     this.$store.commit('setUser', null);
-                    this.$router.push('/user/login');
+                    this.$router.replace('/user/login');
                 })
                 .catch(errorHandler);
         }

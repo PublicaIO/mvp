@@ -16,10 +16,10 @@
 
         .dashboard-video {
             display: block;
-            margin: 15px auto 0 auto;
+            margin: 0 auto 30px auto;
             width: 100%;
-            max-width: 560px;
-            height: 315px;
+            max-width: 670px;
+            height: 400px;
         }
     }
 
@@ -48,14 +48,6 @@
 
         .question-submit-status {
             font-size: 14px;
-
-            &.error {
-                color: #ff0000;
-            }
-
-            &.success {
-                color: #1b7e1b;
-            }
         }
 
         textarea {

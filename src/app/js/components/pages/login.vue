@@ -30,14 +30,11 @@
 
             <div class="login-auth">
                 <section>
-                    <template v-if="error">
-                        <p>
-                            {{ error }}
-                        </p>
-                    </template>
+                    <p v-if="error" class="error">{{ error }}</p>
+                    <p v-if="success" class="success">{{ success }}</p>
                 </section>
 
-                <section class="section-login" v-if="!registerStep">
+                <section class="section-login" v-if="stepIsActive('login')">
                     <form @submit.prevent="login()" ref="signinform">
                         <p>
                             <pbl-ui-form-field :init-value="user_login.email" id="login_email" title="E-mail" type="input" @changed="user_login.email = arguments[0]">
@@ -50,13 +47,13 @@
                         </p>
 
                         <p>
-                            <button class="button button-large button-success" @click="login()">Login</button>
+                            <button type="submit" class="button button-large button-success">Login</button>
                         </p>
                     </form>
                 </section>
 
-                <section class="section-register" v-if="registerStep">
-                    <form @submit.prevent="register" ref="regform">
+                <section class="section-register" v-if="stepIsActive('register')">
+                    <form @submit.prevent="register()" ref="regform">
                         <p>
                             <pbl-ui-form-field :init-value="user_register.firstname" id="reg_firstname" title="Name" type="input" @changed="user_register.firstname = arguments[0]">
                             </pbl-ui-form-field>
@@ -83,15 +80,29 @@
                         </p>
 
                         <p>
-                            <button class="button button-large button-active-action" @click="register">Register</button>
+                            <button type="submit" class="button button-large button-active-action">Register</button>
+                        </p>
+                    </form>
+                </section>
+
+                <section class="section-register" v-if="stepIsActive('reset')">
+                    <form @submit.prevent="resetPassword()" ref="resetform">
+                        <p>
+                            <pbl-ui-form-field :init-value="user_reset.email" id="reg_email" title="E-mail" type="email" @changed="user_reset.email = arguments[0]">
+                            </pbl-ui-form-field>
+                        </p>
+
+                        <p>
+                            <button type="submit" class="button button-large button-active-action">Reset password</button>
                         </p>
                     </form>
                 </section>
 
                 <section class="login-actions">
                     <p>
-                        <a href="#" @click.prevent="registerStep = true" v-if="!registerStep">Registration</a>
-                        <a href="#" @click.prevent="registerStep = false" v-if="registerStep">Login</a>
+                        <a href="#" @click.prevent="setStep('login')" v-if="!stepIsActive('login')">Login</a>
+                        <a href="#" @click.prevent="setStep('register')" v-if="!stepIsActive('register')">Registration</a>
+                        <a href="#" @click.prevent="setStep('reset')" v-if="!stepIsActive('reset')">Forgot password?</a>
                     </p>
                 </section>
             </div>
@@ -108,7 +119,11 @@ import errorHandler from 'utils/errorHandler';
 export default {
     data() {
         return {
-            registerStep: false,
+            steps: {
+                reset: false,
+                register: false,
+                login: true
+            },
             user_login: {
                 email: null,
                 password: null
@@ -120,7 +135,11 @@ export default {
                 password: null,
                 confirm_password: null
             },
-            error: false
+            user_reset: {
+                email: null
+            },
+            error: null,
+            success: null
         }
     },
 
@@ -136,7 +155,7 @@ export default {
                 }
 
                 firebase.auth().signInWithEmailAndPassword(loginData.email, loginData.password)
-                    .then(this.singInCallback)
+                    .then(this.signInCallback)
                     .catch((error) => {
                         this.error = error.message;
                         this.$store.commit('setLoading', false);
@@ -144,7 +163,7 @@ export default {
             }
         },
 
-        singInCallback(user) {
+        signInCallback(user) {
             user.getIdToken().then((token) => {
                 const userData = {
                     displayName: user.displayName,
@@ -153,7 +172,7 @@ export default {
                 }
 
                 this.$store.commit('setUser', userData);
-                this.$router.push('/user/dashboard');
+                this.$router.replace('/user/dashboard');
                 this.$store.commit('setLoading', false);
             })
         },
@@ -172,12 +191,34 @@ export default {
                     this.$store.commit('setLoading', false);
                 });
             }
-        }
-    },
+        },
 
-    watch: {
-        registerStep() {
-            this.error = false;
+        resetPassword() {
+            const isValid = this.$refs.resetform.checkValidity();
+
+            if (!isValid) {
+                return;
+            }
+
+            firebase.auth().sendPasswordResetEmail(this.user_reset.email).then(() => {
+                this.success = 'Email with instructions was sent to provided email address';
+            }).catch((error) => {
+                this.error = error.message;
+                console.error(error);
+            });
+        },
+
+        setStep(step) {
+            this.error = null;
+            this.success = null;
+
+            Object.keys(this.steps).forEach((key) => {
+                this.steps[key] = key === step;
+            })
+        },
+
+        stepIsActive(step) {
+            return this.steps[step];
         }
     },
 

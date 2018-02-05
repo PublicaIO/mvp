@@ -23,6 +23,11 @@
         a {
             color: $primary-color;
             text-decoration: none;
+
+            &:first-child {
+                border-right: 1px solid #0057B1;
+                padding-right: 5px;
+            }
         }
     }
 

@@ -5,7 +5,7 @@
                 <form @submit.prevent="save" ref="emailform" class="mini-wrapper">
                     <p>It seems like we are missing your e-mail, please share it with us!</p>
 
-                    <p v-if="error">{{ error }}</p>
+                    <p class="error" v-if="error">{{ error }}</p>
 
                     <pbl-ui-form-field :init-value="email" id="user_email" title="E-mail" type="input" @changed="email = arguments[0]">
                     </pbl-ui-form-field>
@@ -18,9 +18,11 @@
 
             <template v-else>
                 <div class="wrapper">
+                    <iframe src="https://www.youtube.com/embed/r7Kw2EDoh7I?rel=0&amp;showinfo=0" class="dashboard-video" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+
                     <div class="podcasts-wrapper">
                         <h2>Listen to Publica guidance podcast by our CEO, Josef Marc</h2>
-                        <p v-if="error">{{ error }}</p>
+                        <p class="error" v-if="error">{{ error }}</p>
 
                         <ul v-show="Object.keys(podcasts).length" class="accordion podcasts">
                             <li v-for="(podcast, index) in podcasts" :key="index" :class="podcast.expanded ? 'expanded' : '' ">
