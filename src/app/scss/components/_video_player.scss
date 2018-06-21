@@ -1,0 +1,10 @@
+.video-player-wrapper {
+    text-align: center;
+    padding: 20px;
+
+    iframe {
+        max-width: 600px;
+        height: 400px;
+        width: 90%;
+    }
+}

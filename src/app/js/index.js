@@ -1,13 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
-import axios from 'axios';
 import routes from 'routes';
 import Store from 'store';
 import firebase from 'firebase';
 import App from 'components/App';
 import filters from 'filters';
-import errorHandler from 'utils/errorHandler';
 
 const firebaseConfig = require('config/firebase');
 firebase.initializeApp(firebaseConfig);

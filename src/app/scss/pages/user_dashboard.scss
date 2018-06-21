@@ -44,6 +44,20 @@
         .question-form-content {
             max-width: 670px;
             margin: 0 auto;
+
+            h2 {
+                margin-bottom: 10px;
+            }
+
+            .check-faq {
+                margin: 0 0 40px;
+                font-size: 14px;
+                font-weight: 400;
+
+                a:hover {
+                    font-weight: 400;
+                }
+            }
         }
 
         .question-submit-status {

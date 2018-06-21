@@ -18,7 +18,7 @@
 
             <template v-else>
                 <div class="wrapper">
-                    <iframe src="https://www.youtube.com/embed/r7Kw2EDoh7I?rel=0&amp;showinfo=0" class="dashboard-video" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/VXTiHhBnnvs?rel=0&amp;showinfo=0" class="dashboard-video" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
                     <div class="podcasts-wrapper">
                         <h2>Listen to Publica guidance podcast by our CEO, Josef Marc</h2>
@@ -31,7 +31,8 @@
 
                                 <transition name="expand" v-on:enter="togglePodcastEnter" v-on:leave="togglePodcastLeave">
                                     <div class="item-content" v-show="podcast.expanded" ref="podcast">
-                                        <pbl-audio-player :entity="podcast"></pbl-audio-player>
+                                        <pbl-video-player v-if="podcast.video" :entity="podcast"></pbl-video-player>
+                                        <pbl-audio-player v-else :entity="podcast"></pbl-audio-player>
                                     </div>
                                 </transition>
                             </li>
@@ -49,6 +50,8 @@
                     <div class="wrapper">
                         <div class="question-form-content">
                             <h2>Submit a question</h2>
+                            <p class="check-faq">Check <router-link to="/user/faq">frequently asked questions</router-link></p>
+
                             <p :class="questionSubmitStatusClass" v-show="questionSubmitStatus.message">
                                 {{ questionSubmitStatus.message }}
                             </p>
@@ -79,6 +82,7 @@
 import axios from 'axios';
 import pblUiFormField from 'components/ui/formField';
 import pblAudioPlayer from 'components/ui/audioPlayer';
+import pblVideoPlayer from 'components/ui/videoPlayer';
 import errorHandler from 'utils/errorHandler';
 import firebase from 'firebase';
 import Velocity from 'velocity-animate';
@@ -246,7 +250,8 @@ export default {
 
     components: {
         pblUiFormField,
-        pblAudioPlayer
+        pblAudioPlayer,
+        pblVideoPlayer
     },
 
     watch: {
