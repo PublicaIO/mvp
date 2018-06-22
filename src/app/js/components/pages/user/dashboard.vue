@@ -18,7 +18,10 @@
 
             <template v-else>
                 <div class="wrapper">
-                    <iframe src="https://www.youtube.com/embed/VXTiHhBnnvs?rel=0&amp;showinfo=0" class="dashboard-video" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <h2>Watch the complete overview of the Publica platform</h2>
+                        <iframe src="https://www.youtube.com/embed/VXTiHhBnnvs?rel=0&amp;showinfo=0" class="dashboard-video" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+                    </div>
 
                     <div class="podcasts-wrapper">
                         <h2>Listen to Publica guidance podcast by our CEO, Josef Marc</h2>

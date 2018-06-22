@@ -42,18 +42,17 @@ const save = (req, res) => {
         published: false
     }
 
-    firebaseAdminApp.database().ref().child('faq').push(faq)
-    .then(() => {
-        sendEmail(faq, (error, message) => {
-            if (error) {
-                console.error('EMAIL_SEND', error.message);
-            }
-        });
+    sendEmail(faq, (error, message) => {
+        if (error) {
+            console.error('EMAIL_SEND', error.message, message);
+            const errorResponse = { response: { data: error } };
 
-        // Send success response disregarding of email status.
+            return res.error(errorResponse);
+        }
+
         res.success();
-    })
-    .catch((error) => res.error(error.code, error.message));
+    });
+
 }
 
 const get = (req, res) => {

@@ -15,7 +15,10 @@ require('../scss/style');
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
-const router = new VueRouter({ routes });
+const router = new VueRouter({
+    scrollBehavior: (to, from, savedPosition) => ({ x: 0, y: 0 }),
+    routes
+});
 const store = new Vuex.Store(Store);
 
 filters.forEach((filter) => {
