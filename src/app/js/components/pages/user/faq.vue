@@ -91,6 +91,51 @@
         </div>
 
         <div class="faq-item">
+            <div class="question">Will I have the flexibility to set up a Book ICO any way I want?</div>
+            <div class="answer">
+                <p>It is totally up to the author how they choose to run their ICO. You can choose your own business model - set up a Book ICO campaign launch date, duration of the Book ICO campaign, price of the book during the ICO period and after (Price of a book must be greater than the ICO price, to provide incentive for people to support your project at the early stage and to be able to raise funding for your book).</p>
+                <p>You can also select how many copies will be sold during the Book ICO campaign and how many book copies will be available in total (for example, you can set a maximum of 100 books to be sold during the Book ICO and sell up to 1000 books after the Book ICO).</p>
+                <p>Finally, you can decide at what conditions your Book ICO campaign will be considered as successful or not. You can define so-called Soft Cap (the minimum amount of sold book copies during the Book ICO campaign to consider your Book ICO as successful) and Hard Cap (maximum amount of book copies available for sale during the Book ICO).</p>
+                <p>Remember, once your Book ICO is launched, you will no longer be able to choose the Book ICO campaign's terms. Although authors will have the flexibility to set up a Book ICO according to their own business model, we recommend to choose the campaign’s terms carefully and consult with author-advisor if needed.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">I'm not a tech person, "Smart contracts" sounds complicated.. Is there a way to simplify smart contracts?</div>
+            <div class="answer">
+                <p>Although smart contracts may appear as something new and complicated, authors don’t need to have any technical knowledge in order to set up a smart contract (in fact, you don’t even set up a smart contract yourself).</p>
+                <p>Before launching a Book ICO campaign, authors will be required to enter information about their Book ICO campaign. For example, authors will be asked to define a book’s price during the ICO and after the Book ICO is completed, Book ICO end date, amount of books sold during the Book ICO and the total amount of books that will be available for sale. When all required fields will be filled, authors can preview their campaign and make any changes they want.</p>
+                <p>Once the Book ICO will be launched, the smart contract will be automatically deployed, based on the preferences set during Book ICO campaign setup. After launching Book ICO, authors will no longer be able to make changes (blockchain is decentralized and no one has rights to change the records).</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">How can authors learn more about potential resellers?</div>
+            <div class="answer">
+                <p>Publica is providing tools for publishing your book on the blockchain, it is up to author to search and negotiate with potential resellers.</p>
+                <p>The concept of selling tokens instead of book files or licenses, however, provides additional incentives and opportunities for readers to buy more books at a cheaper price during the Book ICO and later sell them on Publica’s BOOK token exchange (currently in development).</p>
+                <p>We will provide more information on opportunities available by introducing a book secondary market.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Can’t I follow the blockchain to reach purchasers?</div>
+            <div class="answer">
+                <p>Blockchain by its nature is anonymous. You can only see a public wallet address in the blockchain, so it is not possible to reach or identify purchasers unless a purchaser is declaring somewhere on the Internet he/she is an owner of a wallet address.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Please elaborate on the “collectible” idea of a Book ICO</div>
+            <div class="answer">
+                <p>Since every book that is published on Publica is represented with a unique BOOK token, one of the requirements in order to publish a book or run a Book ICO is to define a number of book copies that will be sold (authors can choose themselves the number of BOOK tokens = book copies they want to sell). This is creating a limited book supply (even is an author sells one million copies). Authors can leverage the fact that their book is distributed in a limited supply and create scarcity.</p>
+                <p>If a book is demanded, and supply is limited, the value of a BOOK token can grow, thus there’s bigger chance that readers will buy the book.</p>
+                <p>Currently, there’s a new trend of digital collectibles/crypto collectibles emerging, with new services appearing every day. People are excited about collecting rare tokens and Publica is the only platform that is offering books as tokens.</p>
+                <p>By saying that, we want to inform authors on all the benefits that blockchain and Publica is providing. This might be an additional “selling point” for authors to find and attract new readers, however, the limited supply by itself is not guaranteeing a demand for the book.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
             <div class="question">Why do they call Publica - Ethereum for Ebooks?</div>
             <div class="answer">
                 <p>Ethereum is known for a booming multi-billion ICO market. Publica is a small Ethereum tailored for publishing.</p>
